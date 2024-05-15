@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+</head>
+<body>
+    <h1>Crear una cuenta nueva</h1>
+    <% if locals[:mensaje] %>
+        <p style="color: red;"><%= locals[:mensaje] %></p>
+    <% end %>
+    <form action="/registro" method="post">
+        <label for="names">Nombres:</label>
+        <input type="text" name="names" required><br>
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" name="username" required><br>
+        <label for="email">Correo electrónico:</label>
+        <input type="email" name="email" required><br>
+        <label for="password">Contraseña:</label>
+        <input type="password" name="password" required><br>
+        <button type="submit">Registrarse</button>
+    </form>
+</body>
+</html>
