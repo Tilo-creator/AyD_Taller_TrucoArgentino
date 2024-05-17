@@ -15,7 +15,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_205541) do
     t.string "chapter"
     t.string "title"
     t.string "description"
-    t.string "progress"
     t.integer "user_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
