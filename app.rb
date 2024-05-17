@@ -6,7 +6,7 @@ set :database_file, './config/database.yml'
 
 class App < Sinatra::Application
   def initialize(app = nil)
-    super()
+    super
   end
 
   get '/' do 
@@ -18,27 +18,32 @@ class App < Sinatra::Application
   end
 
   post '/login' do
-    # Busca un usuario en la base de datos con el email y contraseña proporcionados
     @user = User.find_by(username: params[:username], password: params[:password])
     
-    # Verifica si se encontró un usuario con los datos proporcionados
     if @user
-      # Si se encuentra, inicia sesión guardando su ID en la sesión
       session[:user_id] = @user.id
-      redirect '/entre' # Redirige al perfil del usuario
+      # Redirigir al usuario según el juego seleccionado
+      case params[:juego]
+      when 'truco'
+        redirect '/juegos/truco'
+      when 'poker'
+        redirect '/juegos/poker'
+      when 'escoba'
+        redirect '/juegos/escoba'
+      else
+        redirect '/juegos'
+      end
     else
       'Credenciales incorrectas. Inténtalo de nuevo.' 
     end
   end
-
+  
   get '/perfil' do
-    # Verifica si hay un usuario iniciado sesión
     if session[:user_id]
-      # Busca el usuario en la base de datos utilizando su ID guardado en la sesión
       @user = User.find(session[:user_id])
-      erb :perfil, locals: { user: @user } # Muestra la página del perfil
+      erb :perfil, locals: { user: @user }
     else
-      redirect '/login' # Si no hay sesión iniciada, redirige al inicio de sesión
+      redirect '/login'
     end
   end
 
@@ -51,20 +56,31 @@ class App < Sinatra::Application
   end
 
   post '/registro' do
-    # Crea un nuevo usuario con los datos del formulario
     @user = User.new(names: params[:names], username: params[:username], email: params[:email], password: params[:password])
     
-    # Intenta guardar el usuario en la base de datos
     if @user.save
-      # Si se guarda correctamente, inicia sesión guardando su ID en la sesión
       session[:user_id] = @user.id
-      redirect '/perfil' # Redirige al perfil del usuario
+      redirect '/perfil'
     else
       erb :registro, locals: { mensaje: 'Hubo un error al registrar el usuario. Inténtalo de nuevo.' }
     end
   end
 
+  get '/juegos' do
+    juegos = ['Truco', 'Poker', 'Escoba']
+    erb :juegos, locals: { juegos: juegos }
+  end
+
+  get '/juegos/truco' do
+    erb :truco
+  end
+
+  get '/preguntas' do
+    erb :preguntas
+  end
+
+
+
 end
 
-# Ejecuta la aplicación si este archivo es el principal
 App.run! if __FILE__ == $0
