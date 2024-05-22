@@ -4,10 +4,11 @@ class CreateLessonsTable < ActiveRecord::Migration[7.1]
       t.string :chapter
       t.string :title
       t.string :description
-      t.references :user, null: false, foreign_key: true # Agrega la referencia a la tabla users
+      t.references :question, foreign_key: true # Agrega la referencia a la tabla users
 
       t.datetime :created_at
       t.datetime :updated_at
     end
   end
 end
+

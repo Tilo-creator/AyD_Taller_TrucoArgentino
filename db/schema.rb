@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_17_205541) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_19_023445) do
   create_table "lessons", force: :cascade do |t|
     t.string "chapter"
     t.string "title"
     t.string "description"
-    t.integer "user_id", null: false
+    t.integer "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["user_id"], name: "index_lessons_on_user_id"
+    t.index ["question_id"], name: "index_lessons_on_question_id"
   end
 
   create_table "progres", force: :cascade do |t|
@@ -28,14 +28,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_205541) do
     t.datetime "updated_at"
   end
 
+  create_table "question", force: :cascade do |t|
+    t.string "number"
+    t.string "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "names"
     t.string "username"
     t.string "email"
     t.string "password"
+    t.integer "progres_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["progres_id"], name: "index_users_on_progres_id"
   end
 
-  add_foreign_key "lessons", "users"
+  add_foreign_key "lessons", "questions"
+  add_foreign_key "users", "progres", column: "progres_id"
 end

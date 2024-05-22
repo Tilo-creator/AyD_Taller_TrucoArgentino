@@ -2,6 +2,8 @@ require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/activerecord'
 require './models/user'
+require './models/lesson'
+require './models/application_record'
 set :database_file, './config/database.yml'
 
 class App < Sinatra::Application
