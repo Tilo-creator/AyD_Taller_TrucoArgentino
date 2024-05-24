@@ -35,6 +35,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_023445) do
     t.datetime "updated_at"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.text "content"
+    t.integer "lesson_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_questions_on_lesson_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "names"
     t.string "username"
@@ -47,5 +55,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_023445) do
   end
 
   add_foreign_key "lessons", "questions"
+  add_foreign_key "questions", "lessons"
   add_foreign_key "users", "progres", column: "progres_id"
 end
