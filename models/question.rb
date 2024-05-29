@@ -1,3 +1,3 @@
 class Progress <ApplicationRecord
-    belongs_to :Lesson
+  belongs_to :Lesson
 end

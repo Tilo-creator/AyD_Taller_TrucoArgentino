@@ -40,3 +40,12 @@ lessons = [
 lessons.each do |lesson|
   Lesson.create(lesson)
 end
+
+
+# db/seeds.rb
+Question.create([
+  { description: "¿Con qué tipo de mazo se juega el truco?", correct_option_text: "Mazo español de 40 cartas" },
+  { description: "¿Cuántos jugadores pueden jugar al truco?", correct_option_text: "Entre 2 y 6 jugadores" },
+  { description: "¿Cuál es la carta más alta en el truco?", correct_option_text: "El 1 de espadas" },
+  { description: "¿Cómo se llama la jugada donde se miente sobre las cartas?", correct_option_text: "Truco" }
+])

@@ -3,6 +3,7 @@ require 'sinatra/base'
 require 'sinatra/activerecord'
 require './models/user'
 require './models/lesson'
+require './models/question'
 require './models/application_record'
 set :database_file, './config/database.yml'
 
@@ -53,6 +54,11 @@ class App < Sinatra::Application
     "Credenciales válidas"
   end
 
+  get '/lecciones' do
+    @lecciones = Lesson.all
+    erb :lecciones
+  end
+
   get '/registro' do
     erb :registro
   end
@@ -74,15 +80,12 @@ class App < Sinatra::Application
   end
 
   get '/juegos/truco' do
-    erb :truco
+    @lessons = Lesson.all
+    erb :truco, locals: { lessons: @lessons }
   end
 
-  get '/preguntas' do
-    erb :preguntas
-  end
+  
 
-
-
-end
 
 App.run! if __FILE__ == $0
+end

@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Perfil</title>
-</head>
-<body>
-    <h1>Perfil de <%= user.username %></h1>
-    <p>Nombres: <%= user.names %></p>
-    <p>Email: <%= user.email %></p>
-    <a href="/logout"><button>Cerrar sesión</button></a>
-</body>
-</html>
+<h2>Perfil de <%= user.names %></h2>
+<p>Nombre de usuario: <%= user.username %></p>
+<p>Correo electrónico: <%= user.email %></p>
+
+<h3>Estadísticas</h3>
+<p>Preguntas respondidas: <%= user.questions_answered %></p>
+<p>Preguntas correctas: <%= user.questions_correct %></p>
+<p>Preguntas incorrectas: <%= user.questions_incorrect %></p>
+
+<a href="/lecciones">Ver Lecciones</a>
+<a href="/preguntas">Responder Preguntas</a>

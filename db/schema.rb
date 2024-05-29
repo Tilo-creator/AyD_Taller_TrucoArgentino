@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_19_023445) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_22_134500) do
   create_table "lessons", force: :cascade do |t|
     t.string "chapter"
     t.string "title"
@@ -51,6 +51,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_023445) do
     t.integer "progres_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "questions_answered", default: 0
+    t.integer "questions_correct", default: 0
+    t.integer "questions_incorrect", default: 0
     t.index ["progres_id"], name: "index_users_on_progres_id"
   end
 
