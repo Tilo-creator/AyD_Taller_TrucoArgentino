@@ -6,38 +6,45 @@
     <title>Iniciar sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-        body {
-            background-size: cover;
-            background-position: center center; /* Centrar tanto horizontal como verticalmente */
-            background-repeat: no-repeat;
-            min-height:100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('/juegos.jpg'); /* Reemplaza 'fondo.jpg' con la URL de tu imagen de fondo */
-        }
-        .form-container {
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
-        }
-        .form-label {
-            color: #333; /* Color para las etiquetas */
-            font-weight: bold;
-        }
-        .form-control {
-            border-radius: 6px;
-        }
-        .btn-primary {
-            background-color: #f87922; /* Color de fondo para el botón */
-            border-color: #f87922; /* Color del borde */
-            font-weight: bold;
-        }
-        .btn-primary:hover {
-            background-color: #d75d16; /* Cambio de color al pasar el ratón */
-            border-color: #d75d16;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('/juegos.jpg');
+        margin: 0;
+    }
+    
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-label {
+        font-weight: bold;
+    }
+    
+    .form-control {
+        border-radius: 6px;
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        font-weight: bold;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+    
     </style>
 </head>
 <body>

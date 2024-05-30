@@ -4,68 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pregunta</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <h1>Pregunta:</h1>
-    <div id="pregunta">
-        <p id="descripcion"><%= @question.description %></p>
-        
-        <h2>Opciones:</h2>
-        <ul id="opciones">
-            <% @question.options.split(',').each do |option| %>
-                <li><%= option.strip %></li>
-            <% end %>
-        </ul>
-    </div>
+    <p><%= @question.description %></p>
+    
+    <h2>Opciones:</h2>
+    <ul>
+        <% @question.options.split(',').each do |option| %>
+            <li>
+                <form action="/preguntas/responder" method="post" style="display:inline;">
+                    <input type="hidden" name="pregunta_id" value="<%= @question.id %>">
+                    <input type="hidden" name="respuesta" value="<%= option.strip %>">
+                    <button type="submit"><%= option.strip %></button>
+                </form>
+            </li>
+        <% end %>
+    </ul>
 
-    <form id="respuesta-form" action="/preguntas/responder" method="post">
-        <input type="hidden" name="pregunta_id" id="pregunta_id" value="<%= @question.id %>">
-        <label for="respuesta">Tu respuesta:</label>
-        <input type="text" id="respuesta" name="respuesta">
-        <button type="submit">Responder</button>
-    </form>
-
-    <div id="mensaje" style="display:none;"></div>
-
-    <script>
-        document.getElementById('respuesta-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            var form = event.target;
-            var formData = new FormData(form);
-            
-            fetch('/preguntas/responder', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                var mensajeDiv = document.getElementById('mensaje');
-                mensajeDiv.innerHTML = data.resultado;
-                mensajeDiv.className = data.resultado.includes('correcta') ? 'correcto' : 'incorrecto';
-                mensajeDiv.style.display = 'block';
-                
-                setTimeout(function() {
-                    mensajeDiv.style.display = 'none';
-
-                    // Actualizar la pregunta y las opciones
-                    document.getElementById('pregunta_id').value = data.nueva_pregunta.id;
-                    document.getElementById('descripcion').innerText = data.nueva_pregunta.description;
-                    
-                    var opcionesUl = document.getElementById('opciones');
-                    opcionesUl.innerHTML = '';
-                    data.nueva_pregunta.options.split(',').forEach(function(option) {
-                        var li = document.createElement('li');
-                        li.innerText = option.trim();
-                        opcionesUl.appendChild(li);
-                    });
-                    
-                    document.getElementById('respuesta').value = '';
-                }, 5000);
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    </script>
+    <% if @resultado %>
+        <div id="mensaje">
+            <p><%= @resultado %></p>
+        </div>
+        <script>
+            // Ocultar el mensaje después de 5 segundos y recargar la página
+            setTimeout(function() {
+                window.location.href = '/preguntas';
+            }, 5000);
+        </script>
+    <% end %>
 </body>
 </html>

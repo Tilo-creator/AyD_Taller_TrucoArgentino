@@ -8,9 +8,7 @@ require './models/application_record'
 set :database_file, './config/database.yml'
 
 class App < Sinatra::Application
-  def initialize(app = nil)
-    super
-  end
+  enable :sessions
 
   get '/' do 
     erb :inicio
@@ -86,26 +84,21 @@ class App < Sinatra::Application
 
   get '/preguntas' do
     @question = Question.order("RANDOM()").first
+    @resultado = session.delete(:resultado)
     erb :preguntas
   end
 
   post '/preguntas/responder' do
-    content_type :json
-  
     @question = Question.find(params[:pregunta_id])
     if @question.correct_answer?(params[:respuesta])
-      @resultado = "¡Respuesta correcta!"
+      session[:resultado] = "¡Respuesta correcta!"
     else
-      @resultado = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
+      session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
     end
-  
-    nueva_pregunta = Question.order("RANDOM()").first
-    { resultado: @resultado, nueva_pregunta: nueva_pregunta }.to_json
+    
+    session[:mostrar_mensaje] = true # Indica que se debe mostrar el mensaje
+    redirect '/preguntas'
   end
-  
-  
-  
-  
 end
 
 App.run! if __FILE__ == $0
