@@ -90,17 +90,19 @@ class App < Sinatra::Application
   end
 
   post '/preguntas/responder' do
+    content_type :json
+  
     @question = Question.find(params[:pregunta_id])
     if @question.correct_answer?(params[:respuesta])
       @resultado = "¡Respuesta correcta!"
     else
       @resultado = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
     end
-    
-    session[:mostrar_mensaje] = true # Indica que se debe mostrar el mensaje
-    
-    redirect '/preguntas' # Redirige para cargar la vista de preguntas nuevamente
+  
+    nueva_pregunta = Question.order("RANDOM()").first
+    { resultado: @resultado, nueva_pregunta: nueva_pregunta }.to_json
   end
+  
   
   
   
