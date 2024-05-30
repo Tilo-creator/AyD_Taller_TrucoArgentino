@@ -1,10 +1,10 @@
-<!-- preguntas.erb -->
+<!-- views/preguntas.erb -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preguntas</title>
+    <title>Pregunta</title>
 </head>
 <body>
     <h1>Pregunta:</h1>
@@ -12,20 +12,33 @@
     
     <h2>Opciones:</h2>
     <ul>
-        <% @question.options.each do |option| %>
-            <li><%= option %></li>
+        <% @question.options.split(',').each do |option| %>
+            <li><%= option.strip %></li>
         <% end %>
     </ul>
 
-    <form action="/preguntas/responder" method="post">
+    <form id="respuesta-form" action="/preguntas/responder" method="post">
         <input type="hidden" name="pregunta_id" value="<%= @question.id %>">
         <label for="respuesta">Tu respuesta:</label>
         <input type="text" id="respuesta" name="respuesta">
         <button type="submit">Responder</button>
     </form>
 
-    <% if @resultado %>
-        <p><%= @resultado %></p>
+    <% if session[:mostrar_mensaje] %>
+        <div id="mensaje">
+            <% if @resultado %>
+                <p><%= @resultado %></p>
+            <% end %>
+        </div>
+        <script>
+            // Ocultar el mensaje después de 5 segundos
+            setTimeout(function() {
+                var mensajeDiv = document.getElementById('mensaje');
+                mensajeDiv.style.display = 'none';
+            }, 5000);
+        </script>
     <% end %>
+
+    <% session[:mostrar_mensaje] = false %>
 </body>
 </html>

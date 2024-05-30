@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_22_134500) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_16_185809) do
   create_table "lessons", force: :cascade do |t|
     t.string "chapter"
     t.string "title"
@@ -21,26 +21,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_22_134500) do
     t.index ["question_id"], name: "index_lessons_on_question_id"
   end
 
-  create_table "progres", force: :cascade do |t|
-    t.string "progressLessons"
-    t.string "progressQuestion"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "question", force: :cascade do |t|
-    t.string "number"
-    t.string "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "questions", force: :cascade do |t|
-    t.text "content"
-    t.integer "lesson_id"
+    t.text "description", null: false
+    t.string "options", null: false
+    t.string "correct_answer", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["lesson_id"], name: "index_questions_on_lesson_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,16 +34,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_22_134500) do
     t.string "username"
     t.string "email"
     t.string "password"
-    t.integer "progres_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "questions_answered", default: 0
-    t.integer "questions_correct", default: 0
-    t.integer "questions_incorrect", default: 0
-    t.index ["progres_id"], name: "index_users_on_progres_id"
   end
 
   add_foreign_key "lessons", "questions"
-  add_foreign_key "questions", "lessons"
-  add_foreign_key "users", "progres", column: "progres_id"
 end

@@ -84,8 +84,26 @@ class App < Sinatra::Application
     erb :truco, locals: { lessons: @lessons }
   end
 
-  
+  get '/preguntas' do
+    @question = Question.order("RANDOM()").first
+    erb :preguntas
+  end
 
+  post '/preguntas/responder' do
+    @question = Question.find(params[:pregunta_id])
+    if @question.correct_answer?(params[:respuesta])
+      @resultado = "¡Respuesta correcta!"
+    else
+      @resultado = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
+    end
+    
+    session[:mostrar_mensaje] = true # Indica que se debe mostrar el mensaje
+    
+    redirect '/preguntas' # Redirige para cargar la vista de preguntas nuevamente
+  end
+  
+  
+  
+end
 
 App.run! if __FILE__ == $0
-end

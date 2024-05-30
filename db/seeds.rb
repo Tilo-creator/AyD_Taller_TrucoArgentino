@@ -1,9 +1,5 @@
-# db/seeds.rb
 
-# Requiere el archivo de la aplicación para tener acceso a los modelos
 require './app'
-
-# Semillas para los usuarios
 users = [
   { names: 'Jon Doe', username: 'jondoe', email: 'jon@doe.com', password: 'abc' },
   { names: 'Jane Doe', username: 'janedoe', email: 'jane@doe.com', password: 'abc' },
@@ -42,10 +38,30 @@ lessons.each do |lesson|
 end
 
 
-# db/seeds.rb
-Question.create([
-  { description: "¿Con qué tipo de mazo se juega el truco?", correct_option_text: "Mazo español de 40 cartas" },
-  { description: "¿Cuántos jugadores pueden jugar al truco?", correct_option_text: "Entre 2 y 6 jugadores" },
-  { description: "¿Cuál es la carta más alta en el truco?", correct_option_text: "El 1 de espadas" },
-  { description: "¿Cómo se llama la jugada donde se miente sobre las cartas?", correct_option_text: "Truco" }
-])
+
+Question.create(
+  description: "¿Cuántas cartas se reparten a cada jugador al comienzo de una partida de Truco?",
+  options: "3, 4, 6, 9",
+  correct_answer: "3"
+)
+
+Question.create(
+  description: "En el Truco Argentino, ¿cuál es el valor más alto de las cartas?",
+  options: "Espada, Oro, Copa, Basto",
+  correct_answer: "Espada"
+)
+
+Question.create(
+  description: "¿Cuántos puntos debe alcanzar un equipo para ganar una partida de Truco Argentino?",
+  options: "15, 20, 30, 40",
+  correct_answer: "30"
+)
+
+Question.create(
+  description: "¿Cuál es la carta que se considera el 'Ancho de Espada' en el Truco Argentino?",
+  options: "As de Espada, Sota de Espada, Caballo de Espada, Rey de Espada",
+  correct_answer: "As de Espada"
+)
+
+
+puts "¡Se crearon las preguntas sobre el Truco Argentino!"
