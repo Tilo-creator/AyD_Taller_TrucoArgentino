@@ -77,6 +77,14 @@ class App < Sinatra::Application
     erb :juegos, locals: { juegos: juegos }
   end
 
+  get '/juegos/poker' do
+    erb :poker # Ruta para cargar la vista poker.erb
+  end
+
+  get '/juegos/escoba' do
+    erb :escoba # Ruta para cargar la vista .erb
+  end
+
   get '/juegos/truco' do
     @lessons = Lesson.all
     erb :truco, locals: { lessons: @lessons }
@@ -99,6 +107,13 @@ class App < Sinatra::Application
     session[:mostrar_mensaje] = true # Indica que se debe mostrar el mensaje
     redirect '/preguntas'
   end
+
+
+
 end
+
+
+
+
 
 App.run! if __FILE__ == $0

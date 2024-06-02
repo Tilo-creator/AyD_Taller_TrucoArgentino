@@ -5,33 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecciones</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #121212;
+            color: #ffffff;
             margin: 0;
             padding: 0;
+            background-image: url('/game_background.jpg'); /* Fondo de pantalla estilo juego */
+            background-size: cover;
+            background-position: center;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffd700; /* Dorado */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
         }
 
         .lesson {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
+            border: 2px solid #ffd700; /* Borde dorado */
+            border-radius: 10px;
+            padding: 15px;
             margin-bottom: 20px;
+            background-color: #1f1f1f;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .lesson h2 {
             margin-top: 0;
+            color: #ff6347; /* Rojo tomate */
         }
 
         .lesson p {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .lesson p strong {
+            color: #00bfff; /* Color cian para "Contenido" y "Descripción" */
+        }
+
+        .lesson:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
         }
     </style>
 </head>

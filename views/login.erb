@@ -44,6 +44,12 @@
         background-color: #0056b3;
         border-color: #0056b3;
     }
+
+    .error-message {
+        color: red;
+        margin-top: 10px;
+        text-align: center;
+    }
     
     </style>
 </head>
@@ -63,6 +69,9 @@
                 <button type="submit" class="btn btn-primary">Iniciar sesión</button>
             </div>
         </form>
+        <% if locals[:mensaje] %>
+            <div class="error-message"><%= locals[:mensaje] %></div>
+        <% end %>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
