@@ -28,8 +28,10 @@ lessons = [
   { title: "Finalización de la Ronda", description: "Una ronda finaliza cuando uno de los jugadores gana dos manos, o en caso de empate, cuando se resuelve la mano final. Esto significa que cada mano es crucial y puede determinar el resultado de la ronda. Los jugadores deben estar atentos y adaptar sus estrategias a medida que avanza la ronda.", chapter: "Cuántas manos tiene una ronda de juego y en qué momento finaliza una ronda de juego" },
   { title: "Empates en Manos", description: "En caso de empate en una mano, se considera ganada por el jugador o equipo que ganó la mano previa. Si la primera mano resulta en empate, la ventaja es para el equipo mano, es decir, el que juega primero. Este conocimiento puede influir en las decisiones estratégicas durante el juego.", chapter: "Cuántas manos tiene una ronda de juego y en qué momento finaliza una ronda de juego" },
   { title: "Canto de Envido", description: "El envido es un canto que se realiza antes de jugar la primera carta, basado en el valor de las cartas del mismo palo. El envido puede sumar muchos puntos si se tienen cartas adecuadas. Conocer cuándo y cómo cantar envido es crucial para maximizar tus puntos.", chapter: "Cuales son los distintos tipos de cantos que hay" },
-  { title: "Canto de Truco", description: "El truco es un canto que puede ser realizado en cualquier momento del juego y aumenta el valor de la mano. Al cantar truco, desafías al oponente a aceptar o rechazar el reto. Si el oponente acepta y pierde, tú ganas más puntos. Sin embargo, si aceptan y ganan, ellos obtienen los puntos adicionales.", chapter: "Cuales son los distintos tipos de cantos que hay" },
-  { title: "Canto de Retruco y Vale Cuatro", description: "El retruco y vale cuatro son cantos que incrementan aún más el valor de la mano y se utilizan para desafiar al oponente. Estos cantos son utilizados en situaciones estratégicas para presionar al oponente y forzarlo a tomar decisiones arriesgadas. Conocer cuándo utilizar estos cantos puede cambiar el rumbo del juego.", chapter: "Cuales son los distintos tipos de cantos que hay" },
+  { title: "Canto del Real Envido", description:"El Real Envido es un canto como el Envido, pero la diferencia es que vale 3 puntos que se puede acumula con el canto del envido si se hizo antes", chapter: "Cuales son los distintos tipos de cantos que hay"},
+  { title: "Canto del FaltaEnvido", description:"El Falta Envido es un canto como el envido pero este le da algandor los puntos que les falte al contrincante para ganar", chapter: "Cuales son los distintos tipos de cantos que hay"},
+  { title: "Canto de Truco", description: "El truco es un canto que puede ser realizado en cualquier momento del juego y aumenta el valor de la mano. Al cantar truco, desafías al oponente a aceptar o rechazar el reto. Si el oponente acepta y pierde, tú ganas más puntos. Sin embargo, si aceptan y ganan, ellos obtienen los puntos adicionales, que son 2 puntos.", chapter: "Cuales son los distintos tipos de cantos que hay" },
+  { title: "Canto de Retruco y Vale Cuatro", description: "El retruco y vale cuatro son cantos que incrementan aún más el valor de la mano, 3 puntos para el retruco y 4 para vale cuatro.  Estos cantos son utilizados en situaciones estratégicas para presionar al oponente y forzarlo a tomar decisiones arriesgadas. Conocer cuándo utilizar estos cantos puede cambiar el rumbo del juego.", chapter: "Cuales son los distintos tipos de cantos que hay" },
   { title: "Contar los Puntos del Envido", description: "Los puntos del envido se cuentan sumando el valor de dos cartas del mismo palo, más 20 puntos. Si un jugador tiene dos 7 del mismo palo, su envido es 27 puntos (7 + 7 + 20). Comprender cómo contar los puntos del envido es fundamental para evaluar tus posibilidades y decidir si quieres cantar o aceptar un envido.", chapter: "Contar los puntos y en qué orden van cantando los jugadores sus puntos" },
   { title: "Canto de Puntos", description: "El canto de puntos se realiza en orden, comenzando por el jugador que ganó la mano anterior. Cada jugador tiene la oportunidad de cantar sus puntos, y el jugador con el puntaje más alto gana los puntos en juego. Este proceso de canto permite a los jugadores evaluar sus manos y tomar decisiones informadas.", chapter: "Contar los puntos y en qué orden van cantando los jugadores sus puntos" },
   { title: "Marcador y Puntos Ganados", description: "El marcador registra los puntos ganados por cada jugador o equipo y determina el ganador final. Es importante llevar un registro preciso de los puntos para evitar confusiones y disputas durante el juego. Conocer cómo funciona el sistema de puntuación te permitirá seguir el progreso del juego y planificar tus estrategias a largo plazo.", chapter: "Contar los puntos y en qué orden van cantando los jugadores sus puntos" }
@@ -75,6 +77,31 @@ Question.create(
   description:"¿Cuantas rondas tiene una partida?",
   options: "2, 3, 4, 5",
   correct_answer: "3"
+)
+Question.create(
+  description:"¿cuantos puntos vale el Envido?",
+  options:"1,2,3,4",
+  correct_answer:"2"
+)
+Question.create(
+  description:"¿cuantos puntos vale el Real Envido?",
+  options:"1,2,3,4",
+  correct_answer:"3"
+)
+Question.create(
+  description:"¿cuantos puntos vale el Truco?",
+  options:"1,2,3,4",
+  correct_answer:"2"
+)
+Question.create(
+  description:"¿cuantos puntos vale el ReTruco?",
+  options:"1,2,3,4",
+  correct_answer:"3"
+)
+Question.create(
+  description:"¿cuantos puntos vale el ValeCruatro?",
+  options:"1,2,3,4",
+  correct_answer:"4"
 )
 puts "¡Se crearon las preguntas sobre el Truco Argentino!"
 statistics = [
