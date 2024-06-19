@@ -4,6 +4,7 @@ require 'sinatra/activerecord'
 require './models/user'
 require './models/lesson'
 require './models/question'
+require './models/statistic'
 require './models/application_record'
 set :database_file, './config/database.yml'
 
@@ -62,11 +63,14 @@ class App < Sinatra::Application
   end
 
   post '/registro' do
-    @user = User.new(names: params[:names], username: params[:username], email: params[:email], password: params[:password])
     
+    @user = User.new(names: params[:names], username: params[:username], email: params[:email], password: params[:password])
+  
     if @user.save
       session[:user_id] = @user.id
-      redirect '/perfil'
+      @statistic = Statistic.new(cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal:"0", user_id: @user.id)
+      @statistic.save
+      redirect '/juegos'
     else
       erb :registro, locals: { mensaje: 'Hubo un error al registrar el usuario. Inténtalo de nuevo.' }
     end
@@ -96,16 +100,43 @@ class App < Sinatra::Application
     erb :preguntas
   end
 
-  post '/preguntas/responder' do
-    @question = Question.find(params[:pregunta_id])
-    if @question.correct_answer?(params[:respuesta])
-      session[:resultado] = "¡Respuesta correcta!"
+  get '/estadisticas' do
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @statistic = @user.statistics.last
+      erb :estadisticas, locals: { estadistic: @statistic }
     else
-      session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
+      redirect '/login'
     end
-    
-    session[:mostrar_mensaje] = true # Indica que se debe mostrar el mensaje
-    redirect '/preguntas'
+  end
+
+
+  post '/preguntas/responder' do
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @statistic = @user.statistics.last
+      # Inicializar los contadores si son nil
+      @statistic.cantidadDePreguntaRespondidas ||= 0
+      @statistic.cantPregRespondidasBien ||= 0
+      @statistic.CantPregRespondidasMal ||= 0
+
+      @question = Question.find(params[:pregunta_id])
+      if @question.correct_answer?(params[:respuesta])
+        @statistic.cantidadDePreguntaRespondidas += 1
+        @statistic.cantPregRespondidasBien += 1
+        session[:resultado] = "¡Respuesta correcta!"
+
+      else
+        @statistic.cantidadDePreguntaRespondidas += 1
+        @statistic.CantPregRespondidasMal += 1
+        session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
+      end
+      @statistic.save
+      session[:mostrar_mensaje] = true # Indica que se debe mostrar el mensaje
+      redirect '/preguntas'
+    else
+      redirect '/login'
+    end
   end
 
 

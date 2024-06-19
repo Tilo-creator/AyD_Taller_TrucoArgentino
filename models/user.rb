@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true
 
   has_many :lessons, dependent: :destroy
+  has_many :statistics
 
   def answer_question(correct)
     self.questions_answered ||= 0

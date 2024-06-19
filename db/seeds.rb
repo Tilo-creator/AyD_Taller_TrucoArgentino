@@ -1,5 +1,7 @@
 
 require './app'
+require './models/statistic'
+
 users = [
   { names: 'Jon Doe', username: 'jondoe', email: 'jon@doe.com', password: 'abc' },
   { names: 'Jane Doe', username: 'janedoe', email: 'jane@doe.com', password: 'abc' },
@@ -63,5 +65,27 @@ Question.create(
   correct_answer: "As de Espada"
 )
 
+Question.create(
+  description:"¿Cuantas cartas tiene el mazo?",
+  options: "42, 50, 40, 48",
+  correct_answer: "40"
+)
 
+Question.create(
+  description:"¿Cuantas rondas tiene una partida?",
+  options: "2, 3, 4, 5",
+  correct_answer: "3"
+)
 puts "¡Se crearon las preguntas sobre el Truco Argentino!"
+statistics = [
+  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "1"},
+  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "2"},
+  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "3"},
+]
+
+statistics.each do |statistic|
+  Statistic.create(statistic)
+end
+
+puts "se cargaron las estadisticas"
+
