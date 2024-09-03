@@ -1,3 +1,6 @@
+require 'spec_helper'
+require 'rack/test'
+require_relative './app'
 RSpec.describe "App" do 
     before(:all) do 
         @user=User.create(username: 'testnmae' , password: 'pass' , name : 'testUser', email: 'test@gmail.com')
