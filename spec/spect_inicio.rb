@@ -1,6 +1,6 @@
-require 'spec_helper'
-require 'rack/test'
-require_relative '../../app'
+require 'spect_helper'
+require 'rack/test' 
+require_relative '/home/fran/Escritorio/AyD_Taller_TrucoArgentino/app.rb'
 RSpec.describe "App" do 
     it "Mustra pantalla de incio " do 
         get '/'

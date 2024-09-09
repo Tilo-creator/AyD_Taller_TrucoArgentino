@@ -7,3 +7,4 @@ gem 'sinatra-activerecord'
 gem 'sqlite3', '~> 1.4'
 gem 'rake'
 gem 'simplecov', require: false
+gem 'rack-test'

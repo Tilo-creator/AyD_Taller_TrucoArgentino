@@ -1,11 +1,14 @@
+# app.rb
 require 'sinatra'
-require 'sinatra/base'
 require 'sinatra/activerecord'
 require './models/user'
 require './models/lesson'
 require './models/question'
 require './models/statistic'
 require './models/application_record'
+
+set :database_file, './config/database.yml'
+
 set :database_file, './config/database.yml'
 
 class App < Sinatra::Application
@@ -80,6 +83,9 @@ class App < Sinatra::Application
     juegos = ['Truco', 'Poker', 'Escoba']
     erb :juegos, locals: { juegos: juegos }
   end
+
+
+
 
   get '/juegos/poker' do
     erb :poker # Ruta para cargar la vista poker.erb

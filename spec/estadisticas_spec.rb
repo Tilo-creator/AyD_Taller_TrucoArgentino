@@ -1,6 +1,6 @@
-require 'spec_helper'
+require_relative 'spec_helper'
 require 'rack/test'
-require_relative '../../app'
+require_relative '../app'
 
 RSpec.describe "Estadísticas", type: :request do
   include Rack::Test::Methods
@@ -10,6 +10,9 @@ RSpec.describe "Estadísticas", type: :request do
   end
 
   before(:each) do
+    User.delete_all
+    Statistic.delete_all
+
     @user = User.create(names: "Test User", username: "testuser", email: "test@example.com", password: "password")
     @statistic = Statistic.create(
       cantidadDePreguntaRespondidas: 10,
@@ -22,7 +25,7 @@ RSpec.describe "Estadísticas", type: :request do
 
   it "muestra las estadísticas para un usuario autenticado" do
     get '/estadisticas'
-    
+
     expect(last_response).to be_ok
     expect(last_response.body).to include("Estadísticas")
     expect(last_response.body).to include("10")  # Verificar que el total de preguntas respondidas se muestra
@@ -33,7 +36,7 @@ RSpec.describe "Estadísticas", type: :request do
   it "redirige al login si no hay un usuario autenticado" do
     get '/logout' # Simula un logout para invalidar la sesión
     get '/estadisticas'
-    
+
     expect(last_response).to be_redirect
     follow_redirect!
     expect(last_request.path).to eq('/login')

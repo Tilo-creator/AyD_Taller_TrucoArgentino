@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'rack/test'
-require_relative './app'
+require_relative '/home/fran/Escritorio/AyD_Taller_TrucoArgentino/app.rb'
 RSpec.describe "App" do 
     before(:all) do 
         @user=User.create(username: 'testnmae' , password: 'pass' , name : 'testUser', email: 'test@gmail.com')
