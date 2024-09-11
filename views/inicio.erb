@@ -8,89 +8,94 @@
     <style>
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #28a745; /* Fondo verde */
-        background-image: url('https://example.com/cartas-y-fichas.jpg'); /* URL de una imagen de fondo con cartas y fichas */
-        background-size: cover;
-        background-position: center;
-        color: #fff;
+        background-color: #f0f4f8; /* Fondo gris claro */
+        color: #333;
         margin: 0;
         padding: 0;
         display: flex;
-        align-items: center; /* Centrar verticalmente */
-        justify-content: center; /* Centrar horizontalmente */
-        height: 100vh; /* Altura completa de la pantalla */
-        text-align: center; /* Centrar el texto */
-        flex-direction: column; /* Para apilar el título y el contenedor verticalmente */
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        flex-direction: column;
     }
 
     .header {
         margin-bottom: 20px;
-        background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
+        background-color: #004d40; /* Fondo verde oscuro */
         padding: 10px 20px;
-        border-radius: 10px;
+        border-radius: 8px;
+        color: #ffffff;
     }
     
     .container {
-        background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
+        background-color: #ffffff; /* Fondo blanco */
         padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para mayor contraste */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
     }
     
     h1, h2 {
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para el texto */
+        margin: 0;
+        padding: 0;
     }
     
     h1 {
-        font-size: 4rem;
-        color: #ffffff; /* Color blanco */
+        font-size: 3rem;
+        color: #0056b3; /* Color azul */
         margin-bottom: 20px;
-        transition: all 0.2s ease-in-out;
-    }
-
-    h1:hover {
-        animation: vibrate 0.3s linear infinite;
-    }
-
-    @keyframes vibrate {
-        0% { transform: translate(0); }
-        25% { transform: translate(2px, 2px); }
-        50% { transform: translate(0); }
-        75% { transform: translate(-2px, -2px); }
-        100% { transform: translate(0); }
+        font-weight: bold;
     }
 
     h2 {
-        font-size: 3rem;
-        color: #ffd700; /* Color amarillo */
+        font-size: 2rem;
+        color: #00796b; /* Color verde esmeralda */
     }
     
     .btn {
         display: inline-block;
-        padding: 15px 30px; /* Botones más grandes */
-        font-size: 1.5rem; /* Texto más grande */
+        padding: 12px 24px;
+        font-size: 1.1rem;
         text-decoration: none;
-        color: #fff;
-        background-color: #007bff;
-        border: none;
-        border-radius: 50px; /* Bordes más redondeados */
+        color: #ffffff;
+        border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease; /* Añadir transición para suavizar */
-        margin: 10px; /* Espacio entre botones */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra para botones */
-    }
-    
-    .btn:hover {
-        background-color: #0056b3;
-        transform: scale(1.1); /* Agrandar un poco al pasar el mouse */
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin: 10px;
     }
     
     .btn-primary {
-        background-color: #007bff;
+        background-color: #007bff; /* Color azul */
     }
     
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
     .btn-secondary {
-        background-color: #6c757d;
+        background-color: #28a745; /* Color verde */
+    }
+    
+    .btn-secondary:hover {
+        background-color: #1c7430;
+        transform: scale(1.05);
+    }
+
+    .form-container {
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-tabs .nav-link {
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #007bff;
+        border-color: #007bff;
     }
     
     </style>
@@ -100,9 +105,66 @@
         <h2>Juegos de Cartas</h2>
     </div>
     <div class="container">
-        <h1 class="display-2">Bienvenidos</h1>
-        <a href="/login" class="btn btn-primary btn-lg">Iniciar sesión</a>
-        <a href="/registro" class="btn btn-secondary btn-lg">Registrarse</a>
+        <h1>Bienvenidos</h1>
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Iniciar sesión</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="register-tab" data-bs-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Registrarse</a>
+            </li>
+        </ul>
+        <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                <div class="form-container">
+                    <h2>Iniciar sesión</h2>
+                    <form action="/" method="post">
+                        <input type="hidden" name="action" value="login">
+                        <div class="mb-3">
+                            <label for="login-username" class="form-label">Nombre de usuario:</label>
+                            <input type="text" name="username" class="form-control" id="login-username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="login-password" class="form-label">Contraseña:</label>
+                            <input type="password" name="password" class="form-control" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                <div class="form-container">
+                    <h2>Registrarse</h2>
+                    <form action="/" method="post">
+                        <input type="hidden" name="action" value="register">
+                        <div class="mb-3">
+                            <label for="register-fullname" class="form-label">Nombre completo:</label>
+                            <input type="text" name="fullname" class="form-control" id="register-fullname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="register-username" class="form-label">Nombre de usuario:</label>
+                            <input type="text" name="username" class="form-control" id="register-username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="register-email" class="form-label">Correo electrónico:</label>
+                            <input type="email" name="email" class="form-control" id="register-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="register-password" class="form-label">Contraseña:</label>
+                            <input type="password" name="password" class="form-control" id="register-password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="register-confirm-password" class="form-label">Confirmar contraseña:</label>
+                            <input type="password" name="confirm_password" class="form-control" id="register-confirm-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>
