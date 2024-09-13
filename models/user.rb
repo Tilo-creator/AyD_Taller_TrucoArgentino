@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :lessons, dependent: :destroy
   has_many :statistics
+  has_one :level
 
   def answer_question(correct)
     self.questions_answered ||= 0
