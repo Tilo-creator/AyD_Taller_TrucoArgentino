@@ -142,11 +142,70 @@ class App < Sinatra::Application
       else
         session[:resultado] = "No tienes mas vidas"
         redirect '/preguntas'
+      @statistic.puntos ||= 0
+
+      @question = Question.find(params[:pregunta_id])
+      if @question.correct_answer?(params[:respuesta])
+        @statistic.cantidadDePreguntaRespondidas += 1
+        @statistic.cantPregRespondidasBien += 1
+        @statistic.puntos += 10
+        session[:resultado] = "¡Respuesta correcta!"
+      else
+        @statistic.cantidadDePreguntaRespondidas += 1
+        @statistic.CantPregRespondidasMal += 1
+        @statistic.puntos-=4
+        session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
       end
     else
       redirect '/'
     end
   end
+
+
+
+    def calularNivelesParaUsuarios
+      User.find_each do |user|
+        user_statistics = user.statistics.last # Arreglar typo
+        if user_statistics
+          correctas = user_statistics.cantPregRespondidasBien || 0
+          incorrectas = user_statistics.CantPregRespondidasMal || 0
+    
+          puntos_totales = (correctas * 10) - (incorrectas * 4) # Multiplicación corregida
+          puntos_totales = [0, puntos_totales].max # No dejar puntaje negativo
+    
+          user.update(total_points: puntos_totales)
+    
+          nuevo_nivel = calcularNivel(puntos_totales) # Usar el método correcto
+          user.levels.update(level_number: nuevo_nivel)
+        end
+      end
+    end
+
+    def calcularNivel(puntos)
+      case puntos
+      when 0..99
+        1
+      when 100..199
+        2
+      when 200..299
+        3
+      when 300..399
+        4
+      when 400..499
+        5
+      when 500..599
+        6
+      when 600..699
+        7
+      when 700..799
+        8
+      when 800..899
+        9
+      else
+        10
+      end
+    end
+    
 end
 
 App.run! if __FILE__ == $0
