@@ -123,6 +123,13 @@ class App < Sinatra::Application
     end
   end
 
+  get'/lecciones' do 
+    @lecciones =Lesson.all
+    erb:lecciones
+  end
+  
+
+
 
 
     def calularNivelesParaUsuarios
