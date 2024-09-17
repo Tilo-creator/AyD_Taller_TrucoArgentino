@@ -59,6 +59,11 @@ class App < Sinatra::Application
     end
   end
 
+  get '/lecciones' do
+    lecciones=lecciones.all
+    erb:lecciones
+  end
+
   get '/juegos' do
     juegos = ['Truco', 'Poker', 'Escoba']
     erb :juegos, locals: { juegos: juegos }
