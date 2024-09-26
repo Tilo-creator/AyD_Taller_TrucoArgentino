@@ -11,7 +11,6 @@ set :database_file, './config/database.yml'
 class App < Sinatra::Application
   enable :sessions
 
-  # Página de inicio que maneja tanto el inicio de sesión como el registro
   get '/' do 
     erb :inicio
   end 
@@ -27,28 +26,36 @@ class App < Sinatra::Application
       else
         erb :inicio, locals: { mensaje: 'Credenciales incorrectas. Inténtalo de nuevo.' }
       end
-    elsif params[:action] == 'register'
-      
-      
-      # Manejo del registro
-      if params[:password] == params[:confirm_password]
-        @user = User.new(names: params[:fullname], username: params[:username], email: params[:email], password: params[:password])
-        redirect '/juegos'
-        if @user.save
-          session[:user_id] = @user.id
-          @statistic = Statistic.new(cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal:"0", user_id: @user.id)
-          @statistic.save
-          redirect '/juegos'
-        else
-          erb :inicio, locals: { mensaje: 'Hubo un error al registrar el usuario. Inténtalo de nuevo.' }
-        end
-      else
-        erb :inicio, locals: { mensaje: 'Las contraseñas no coinciden.' }
-      end
-    else
-      redirect '/'
+    elsif params[:action] == 'login'
+      redirect '/login'  # Redirige a la página de registro
     end
   end
+
+  # Ruta para el formulario de registro
+  get '/login' do
+    erb :login  # Vista para el formulario de registro
+  end
+
+  # Ruta para manejar la creación de usuarios
+  post '/login' do
+    if params[:password] == params[:confirm_password]
+      @user = User.new(
+        fullname: params[:fullname],
+        username: params[:username],
+        email: params[:email],
+        password: params[:password]
+      )
+      if @user.save
+        session[:user_id] = @user.id
+        redirect '/juegos'
+      else
+        erb :login, locals: { mensaje: 'Hubo un error al crear tu cuenta. Inténtalo de nuevo.' }
+      end
+    else
+      erb :login, locals: { mensaje: 'Las contraseñas no coinciden. Inténtalo de nuevo.' }
+    end
+  end
+  
 
   get '/perfil' do
     if session[:user_id]
@@ -101,18 +108,18 @@ class App < Sinatra::Application
       @statistic.cantidadDePreguntaRespondidas ||= 0
       @statistic.cantPregRespondidasBien ||= 0
       @statistic.CantPregRespondidasMal ||= 0
-      @statistic.puntos ||= 0
+      @statistic.total_point ||= 0
 
       @question = Question.find(params[:pregunta_id])
       if @question.correct_answer?(params[:respuesta])
         @statistic.cantidadDePreguntaRespondidas += 1
         @statistic.cantPregRespondidasBien += 1
-        @statistic.puntos += 10
+        @statistic.total_point += 10
         session[:resultado] = "¡Respuesta correcta!"
       else
         @statistic.cantidadDePreguntaRespondidas += 1
         @statistic.CantPregRespondidasMal += 1
-        @statistic.puntos-=4
+        @statistic.total_point-=4
         session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
       end
       @statistic.save
@@ -135,7 +142,7 @@ class App < Sinatra::Application
     def calularNivelesParaUsuarios
       User.find_each do |user|
         user_statistics = user.statistics.last # Arreglar typo
-        if user_statistics
+        if user_statistics 
           correctas = user_statistics.cantPregRespondidasBien || 0
           incorrectas = user_statistics.CantPregRespondidasMal || 0
     
