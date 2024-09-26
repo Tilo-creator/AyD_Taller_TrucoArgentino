@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio del Juego</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <h2>Juegos de Cartas</h2>
+    </div>
+    <div class="container">
+        <h1>Bienvenidos</h1>
+        <div>
+            <!-- Botones para alternar entre los formularios -->
+            <button id="toggleButton" class="btn btn-primary">Registrarse</button>
+        </div>
+
+        <!-- Formulario de Iniciar Sesión -->
+        <div id="login-form" class="form-container">
+            <h2>Iniciar sesión</h2>
+            <form action="/" method="post">
+                <div class="mb-3">
+                    <label for="login-username" class="form-label">Nombre de usuario:</label>
+                    <input type="text" name="username" class="form-control" id="login-username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="login-password" class="form-label">Contraseña:</label>
+                    <input type="password" name="password" class="form-control" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            </form>
+        </div>
+
+        <!-- Formulario de Registrarse (Oculto por defecto) -->
+        <div id="register-form" class="form-container" style="display: none;">
+            <h2>Registrarse</h2>
+            <form action="/" method="post">
+                <div class="mb-3">
+                    <label for="register-fullname" class="form-label">Nombre completo:</label>
+                    <input type="text" name="fullname" class="form-control" id="register-fullname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="register-username" class="form-label">Nombre de usuario:</label>
+                    <input type="text" name="username" class="form-control" id="register-username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="register-email" class="form-label">Correo electrónico:</label>
+                    <input type="email" name="email" class="form-control" id="register-email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="register-password" class="form-label">Contraseña:</label>
+                    <input type="password" name="password" class="form-control" id="register-password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="register-confirm-password" class="form-label">Confirmar contraseña:</label>
+                    <input type="password" name="confirm_password" class="form-control" id="register-confirm-password" required>
+                </div>
+                <button type="submit" class="btn btn-secondary">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Vinculando el archivo JavaScript desde la carpeta js -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>
