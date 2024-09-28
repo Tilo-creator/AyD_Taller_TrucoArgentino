@@ -1,6 +1,9 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-image:url("public/th-286086697.jpeg");/* Reemplaza con la ruta correcta a tu imagen */
+    background-image: url("poker.jpg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
     margin: 0;
     padding: 0;
     display: flex;
@@ -81,7 +84,7 @@ h1 {
 .btn-primary {
     width: 100%;
     padding: 10px 0;
-    background: linear-gradient(to right, #ff105f, #ffad06);
+    background: linear-gradient(to right, #332e2e, #b30606);
     border: none;
     outline: none;
     cursor: pointer;
@@ -93,7 +96,7 @@ h1 {
 }
 
 .btn-primary:hover {
-    background: linear-gradient(to right, #ffad06, #ff105f);
+    background: linear-gradient(to right, #332e2e, #b30606);
 }
 
 .btn-secondary {

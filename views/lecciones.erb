@@ -4,70 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecciones</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    <link rel="stylesheet" href="../css/lecciones.css"> <!-- Ruta relativa corregida -->
 
-        body {
-            font-family: 'Press Start 2P', cursive;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            background-image: url('/game_background.jpg'); /* Fondo de pantalla estilo juego */
-            background-size: cover;
-            background-position: center;
+    <script>
+        // Función para manejar el clic en cada lección
+        function toggleLesson(lesson) {
+            lesson.classList.toggle('active');
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 30px;
-            color: #ffd700; /* Dorado */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-        }
-
-        .lesson {
-            border: 2px solid #ffd700; /* Borde dorado */
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            background-color: #1f1f1f;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .lesson h2 {
-            margin-top: 0;
-            color: #ff6347; /* Rojo tomate */
-        }
-
-        .lesson p {
-            margin-bottom: 10px;
-        }
-
-        .lesson p strong {
-            color: #00bfff; /* Color cian para "Contenido" y "Descripción" */
-        }
-
-        .lesson:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-        }
-    </style>
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Lecciones Disponibles</h1>
         <% @lecciones.each do |leccion| %>
-            <div class="lesson">
+            <div class="lesson" onclick="toggleLesson(this)">
                 <h2><%= leccion.title %></h2>
                 <p><strong>Contenido:</strong> <%= leccion.chapter %></p>
                 <p><strong>Descripción:</strong> <%= leccion.description %></p>

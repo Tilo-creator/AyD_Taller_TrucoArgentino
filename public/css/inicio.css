@@ -2,7 +2,7 @@ body {
     min-height: 100vh; 
     height: 100%; /* Asegúrate de que el body ocupe todo el alto */
     font-family: 'Arial', sans-serif;
-    background-image: url("../public/th-286086697.jpeg");
+    background-image: url("poker.jpg");
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
@@ -78,7 +78,7 @@ h2 {
 .btn-primary {
     width: 100%;
     padding: 10px 0;
-    background: linear-gradient(to right, #ff105f, #ffad06);
+    background: linear-gradient(to right, #332e2e, #b30606);
     border: none;
     outline: none;
     cursor: pointer;
@@ -90,7 +90,7 @@ h2 {
 }
 
 .btn-primary:hover {
-    background: linear-gradient(to right, #ffad06, #ff105f);
+    background: linear-gradient(to right, #332e2e, #b30606);
 }
 
 .btn-secondary {
