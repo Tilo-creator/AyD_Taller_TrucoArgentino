@@ -7,10 +7,10 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url('../public/th-286086697.jpeg'); /* Cambia a la imagen deseada */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-image: url("poker.jpg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
 
 .header {
@@ -31,7 +31,7 @@ h2 {
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(194, 106, 106, 0.8);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -93,12 +93,12 @@ h2 {
 }
 
 .card {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(68, 55, 55, 0.6);
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
-    color: #fff;
+    color: #000000;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -159,7 +159,7 @@ h2 {
 }
 
 .stats, .no-stats {
-    margin-top: 1rem;
+    margin-top: rem;
     font-size: 1.1rem;
     color: #f0f0f0;
 }

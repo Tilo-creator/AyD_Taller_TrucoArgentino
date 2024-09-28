@@ -1,0 +1,74 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    background-image: url("poker.jpg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8); /* Mantener la opacidad */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px); /* Desenfocar el fondo */
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffd700; /* Dorado */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.lesson {
+    border: 2px solid #ffd700; /* Borde dorado */
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: rgba(31, 31, 31, 0.9); /* Fondo ligeramente transparente */
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+.lesson h2 {
+    margin-top: 0;
+    color: #ff6347; /* Rojo tomate */
+}
+
+.lesson p {
+    display: none; /* Ocultar contenido inicialmente */
+    margin-bottom: 10px;
+}
+
+.lesson.active p {
+    display: block; /* Mostrar contenido cuando está activo */
+}
+
+.back-button {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1rem;
+    border: 2px solid #ffd700;
+    border-radius: 5px;
+    background-color: #ff6347;
+    transition: background-color 0.3s, transform 0.3s;
+    text-align: center
+}
+
+.back-button:hover {
+    background-color: #ff4500; /* Oscurecer el color del botón al pasar el mouse */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    
+}

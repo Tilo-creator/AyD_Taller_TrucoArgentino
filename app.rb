@@ -26,7 +26,7 @@ class App < Sinatra::Application
       else
         erb :inicio, locals: { mensaje: 'Credenciales incorrectas. Inténtalo de nuevo.' }
       end
-    elsif params[:action] == 'login'
+    elsif params[:action] == 'register'
       redirect '/login'  # Redirige a la página de registro
     end
   end
@@ -55,7 +55,6 @@ class App < Sinatra::Application
       erb :login, locals: { mensaje: 'Las contraseñas no coinciden. Inténtalo de nuevo.' }
     end
   end
-  
 
   get '/perfil' do
     if session[:user_id]
@@ -107,19 +106,15 @@ class App < Sinatra::Application
       # Inicializar los contadores si son nil
       @statistic.cantidadDePreguntaRespondidas ||= 0
       @statistic.cantPregRespondidasBien ||= 0
-      @statistic.CantPregRespondidasMal ||= 0
-      @statistic.total_point ||= 0
-
+      @statistic.CantPregRespondidasMal ||= 0  # Corrige el nombre aquí
       @question = Question.find(params[:pregunta_id])
       if @question.correct_answer?(params[:respuesta])
         @statistic.cantidadDePreguntaRespondidas += 1
         @statistic.cantPregRespondidasBien += 1
-        @statistic.total_point += 10
         session[:resultado] = "¡Respuesta correcta!"
       else
         @statistic.cantidadDePreguntaRespondidas += 1
-        @statistic.CantPregRespondidasMal += 1
-        @statistic.total_point-=4
+        @statistic.CantPregRespondidasMal += 1  # Corrige el nombre aquí
         session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
       end
       @statistic.save
@@ -130,58 +125,53 @@ class App < Sinatra::Application
     end
   end
 
-  get'/lecciones' do 
-    @lecciones =Lesson.all
-    erb:lecciones
+  get '/lecciones' do 
+    @lecciones = Lesson.all
+    erb :lecciones
   end
   
+  def calularNivelesParaUsuarios
+    User.find_each do |user|
+      user_statistics = user.statistics.last
+      if user_statistics 
+        correctas = user_statistics.cantPregRespondidasBien || 0
+        incorrectas = user_statistics.CantPregRespondidasMal || 0
 
+        puntos_totales = (correctas * 10) - (incorrectas * 4)
+        puntos_totales = [0, puntos_totales].max
 
+        user.update(total_points: puntos_totales)
 
-
-    def calularNivelesParaUsuarios
-      User.find_each do |user|
-        user_statistics = user.statistics.last # Arreglar typo
-        if user_statistics 
-          correctas = user_statistics.cantPregRespondidasBien || 0
-          incorrectas = user_statistics.CantPregRespondidasMal || 0
-    
-          puntos_totales = (correctas * 10) - (incorrectas * 4) # Multiplicación corregida
-          puntos_totales = [0, puntos_totales].max # No dejar puntaje negativo
-    
-          user.update(total_points: puntos_totales)
-    
-          nuevo_nivel = calcularNivel(puntos_totales) # Usar el método correcto
-          user.levels.update(level_number: nuevo_nivel)
-        end
+        nuevo_nivel = calcularNivel(puntos_totales)
+        user.levels.update(level_number: nuevo_nivel)
       end
     end
+  end
 
-    def calcularNivel(puntos)
-      case puntos
-      when 0..99
-        1
-      when 100..199
-        2
-      when 200..299
-        3
-      when 300..399
-        4
-      when 400..499
-        5
-      when 500..599
-        6
-      when 600..699
-        7
-      when 700..799
-        8
-      when 800..899
-        9
-      else
-        10
-      end
+  def calcularNivel(puntos)
+    case puntos
+    when 0..99
+      1
+    when 100..199
+      2
+    when 200..299
+      3
+    when 300..399
+      4
+    when 400..499
+      5
+    when 500..599
+      6
+    when 600..699
+      7
+    when 700..799
+      8
+    when 800..899
+      9
+    else
+      10
     end
-    
+  end
 end
 
 App.run! if __FILE__ == $0
