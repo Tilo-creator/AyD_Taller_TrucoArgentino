@@ -1,6 +1,8 @@
 
 require './app'
 require './models/statistic'
+require './models/live'
+
 
 users = [
   { names: 'Jon Doe', username: 'jondoe', email: 'jon@doe.com', password: 'abc' },
@@ -116,3 +118,14 @@ end
 
 puts "se cargaron las estadisticas"
 
+lives =[
+  {cantidadDeVidas: "3", user_id: "1"},
+  {cantidadDeVidas: "3", user_id: "2"},
+  {cantidadDeVidas: "3", user_id: "3"},
+]
+
+lives.each do |live|
+  Live.create(live)
+end
+
+puts "se cagaron las vidas"
