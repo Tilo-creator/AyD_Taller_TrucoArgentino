@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_11_200822) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_30_123456) do
   create_table "lessons", force: :cascade do |t|
     t.string "chapter"
     t.string "title"
@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_200822) do
   end
 
   create_table "levels", force: :cascade do |t|
-    t.integer "level_number"
+    t.integer "level_number", default: 0
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -38,12 +38,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_200822) do
   end
 
   create_table "statistics", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "cantidadDePreguntaRespondidas", default: 0
     t.integer "cantPregRespondidasBien", default: 0
-    t.integer "CantPregRespondidasMal", default: 0
-    t.integer "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "cantPregRespondidasMal", default: 0
+    t.integer "total_points", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_statistics_on_user_id"
   end
 
