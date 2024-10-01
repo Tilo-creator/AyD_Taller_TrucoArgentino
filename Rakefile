@@ -1,5 +1,10 @@
 require 'sinatra/activerecord/rake'
 require './app'
+require 'rake'
+
+
+# Incluir tareas de rake
+Dir.glob('lib/tasks/**/*.rake').each { |r| load r }
 
 
 namespace :db do

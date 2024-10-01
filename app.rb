@@ -4,6 +4,7 @@ require './models/user'
 require './models/lesson'
 require './models/question'
 require './models/statistic'
+require './models/life'
 require './models/application_record'
 
 set :database_file, './config/database.yml'
@@ -38,6 +39,8 @@ class App < Sinatra::Application
           session[:user_id] = @user.id
           @statistic = Statistic.new(cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal:"0", user_id: @user.id)
           @statistic.save
+          @life = Life.new(cantidadDeVidas: "3", user_id: @user.id)
+          @life.save
           redirect '/juegos'
         else
           erb :inicio, locals: { mensaje: 'Hubo un error al registrar el usuario. Inténtalo de nuevo.' }
@@ -60,7 +63,7 @@ class App < Sinatra::Application
   end
 
   get '/lecciones' do
-    lecciones=lecciones.all
+    @lecciones= Lesson.all
     erb:lecciones
   end
 
@@ -92,7 +95,8 @@ class App < Sinatra::Application
     if session[:user_id]
       @user = User.find(session[:user_id])
       @statistic = @user.statistics.last
-      erb :estadisticas, locals: { estadistic: @statistic }
+      @life = @user.lives.last
+      erb :estadisticas, locals: { estadistic: @statistic , vida: @life}
     else
       redirect '/'
     end
@@ -102,24 +106,31 @@ class App < Sinatra::Application
     if session[:user_id]
       @user = User.find(session[:user_id])
       @statistic = @user.statistics.last
+      @life = @user.lives.last
       # Inicializar los contadores si son nil
       @statistic.cantidadDePreguntaRespondidas ||= 0
       @statistic.cantPregRespondidasBien ||= 0
       @statistic.CantPregRespondidasMal ||= 0
-
-      @question = Question.find(params[:pregunta_id])
-      if @question.correct_answer?(params[:respuesta])
-        @statistic.cantidadDePreguntaRespondidas += 1
-        @statistic.cantPregRespondidasBien += 1
-        session[:resultado] = "¡Respuesta correcta!"
+      if @life.cantidadDeVidas > 0
+        @question = Question.find(params[:pregunta_id])
+        if @question.correct_answer?(params[:respuesta])
+         @statistic.cantidadDePreguntaRespondidas += 1
+         @statistic.cantPregRespondidasBien += 1
+          session[:resultado] = "¡Respuesta correcta!"
+        else
+          @statistic.cantidadDePreguntaRespondidas += 1
+          @statistic.CantPregRespondidasMal += 1
+          @life.cantidadDeVidas -= 1
+          session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
+        end
+        @statistic.save
+        @life.save
+        session[:mostrar_mensaje] = true
+        redirect '/preguntas'
       else
-        @statistic.cantidadDePreguntaRespondidas += 1
-        @statistic.CantPregRespondidasMal += 1
-        session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
+        session[:resultado] = "No tienes mas vidas"
+        redirect '/preguntas'
       end
-      @statistic.save
-      session[:mostrar_mensaje] = true
-      redirect '/preguntas'
     else
       redirect '/'
     end
