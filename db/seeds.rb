@@ -11,9 +11,22 @@ users = [
   { names: 'Riacardo Trimboli', username: 'Tilo', email: 'riki.trimboli@gmail.com', password: '1234', isAdmin: 'true'},
 ]
 
+
+users.each do |user_data|
+  user = User.create(user_data)
+  if user.persisted?
+    # Crear un nivel asociado con level_number en 0
+    user.create_level(level_number: 0)
+    puts "Usuario #{user.username} creado con nivel inicial."
+  else
+    puts "Error al crear usuario #{user_data[:username]}: #{user.errors.full_messages.join(', ')}"
+  end
+end
 users.each do |u|
   User.create(u)
 end
+
+
 
 # Semillas para las lecciones
 lessons = [
