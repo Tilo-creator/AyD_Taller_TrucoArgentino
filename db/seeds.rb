@@ -1,29 +1,20 @@
-
-require './app'
+require './app' # Asegúrate de que esto esté correcto según tu estructura de archivos
 require './models/statistic'
+require './models/level' # Asegúrate de que la ruta sea correcta
 
+# Crear usuarios
 users = [
   { names: 'Jon Doe', username: 'jondoe', email: 'jon@doe.com', password: 'abc' },
   { names: 'Jane Doe', username: 'janedoe', email: 'jane@doe.com', password: 'abc' },
-  { names: 'Baby Doe', username: 'babydoe', email: 'baby@doe.com', password: 'abc' },
 ]
 
-
-users.each do |user_data|
-  user = User.create(user_data)
-  if user.persisted?
-    # Crear un nivel asociado con level_number en 0
-    user.create_level(level_number: 0)
-    puts "Usuario #{user.username} creado con nivel inicial."
-  else
-    puts "Error al crear usuario #{user_data[:username]}: #{user.errors.full_messages.join(', ')}"
-  end
-end
 users.each do |u|
   User.create(u)
 end
 
-
+# Crear niveles para usuarios existentes
+Level.create(level_number: 1, user_id: 1)
+Level.create(level_number: 1, user_id: 2)
 
 # Semillas para las lecciones
 lessons = [
@@ -117,15 +108,14 @@ Question.create(
   correct_answer:"4"
 )
 puts "¡Se crearon las preguntas sobre el Truco Argentino!"
+# Crear estadísticas
 statistics = [
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "1"},
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "2"},
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "3"},
+  { cantidadDePreguntaRespondidas: 0, cantPregRespondidasBien: 0, cantPregRespondidasMal: 0, user_id: 1, total_points: 0 },
+  { cantidadDePreguntaRespondidas: 0, cantPregRespondidasBien: 0, cantPregRespondidasMal: 0, user_id: 2, total_points: 0 },
 ]
 
 statistics.each do |statistic|
   Statistic.create(statistic)
 end
-
 puts "se cargaron las estadisticas"
 
