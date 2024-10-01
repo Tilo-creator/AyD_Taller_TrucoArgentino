@@ -63,7 +63,6 @@
         .submenu a:hover {
             transform: translateY(-5px); /* Elevar el botón */
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Sombra más fuerte */
-            background-color: darken(#d32f2f, 10%); /* Oscurecer el color del botón */
         }
         .btn-rojo:hover {
             background-color: #a32727; /* Oscurecer rojo */
@@ -80,11 +79,39 @@
         .submenu i {
             margin-right: 10px; /* Espacio entre el icono y el texto */
         }
+        .hearts {
+            display: flex;
+            position: absolute; /* Cambia a posición absoluta */
+            top: 20px; /* Ajusta el espacio desde el top */
+            right: 20px; /* Ajusta el espacio desde la derecha */
+        }
+
+        .heart {
+            font-size: 50px;
+            color: red;
+            margin-right: 10px;
+        }
+
+        .heart.empty {
+            color: lightgray;
+        }
     </style>
 </head>
 <body>
     <div class="container text-center">
+        <!-- Aquí se mostrarán los corazones -->
+        <div class="hearts">
+            <% (1..3).each do |i| %>
+                <% if i <= vida.cantidadDeVidas %>
+                    <i class="fas fa-heart heart"></i>
+                <% else %>
+                    <i class="fas fa-heart heart empty"></i>
+                <% end %>
+            <% end %>
+        </div>
+
         <div class="titulo">Truco Argentino</div>
+
         <div class="submenu mb-3">
             <a href="/lecciones" class="btn btn-rojo"><i class="bi bi-book"></i>Tomar Lecciones</a>
             <a href="/preguntas" class="btn btn-azul"><i class="bi bi-question-circle"></i>Responder Preguntas</a>
@@ -93,6 +120,7 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>

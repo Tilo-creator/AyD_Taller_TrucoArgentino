@@ -34,7 +34,6 @@ class App < Sinatra::Application
       # Manejo del registro
       if params[:password] == params[:confirm_password]
         @user = User.new(names: params[:fullname], username: params[:username], email: params[:email], password: params[:password])
-        redirect '/juegos'
         if @user.save
           session[:user_id] = @user.id
           @statistic = Statistic.new(cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal:"0", user_id: @user.id)
@@ -82,21 +81,24 @@ class App < Sinatra::Application
 
   get '/juegos/truco' do
     @lessons = Lesson.all
-    erb :truco, locals: { lessons: @lessons }
+    @user = User.find(session[:user_id])
+    @life = @user.lives.last
+    erb :truco, locals: { lessons: @lessons, vida: @life }
   end
 
   get '/preguntas' do
+    @user = User.find(session[:user_id])
+    @life = @user.lives.last
     @question = Question.order("RANDOM()").first
     @resultado = session.delete(:resultado)
-    erb :preguntas
+    erb :preguntas, locals: { vida: @life}
   end
 
   get '/estadisticas' do
     if session[:user_id]
       @user = User.find(session[:user_id])
       @statistic = @user.statistics.last
-      @life = @user.lives.last
-      erb :estadisticas, locals: { estadistic: @statistic , vida: @life}
+      erb :estadisticas, locals: { estadistic: @statistic }
     else
       redirect '/'
     end
