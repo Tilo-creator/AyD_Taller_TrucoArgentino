@@ -1,13 +1,14 @@
 
 require './app'
 require './models/statistic'
-require './models/live'
+require './models/life'
 
 
 users = [
-  { names: 'Jon Doe', username: 'jondoe', email: 'jon@doe.com', password: 'abc' },
-  { names: 'Jane Doe', username: 'janedoe', email: 'jane@doe.com', password: 'abc' },
-  { names: 'Baby Doe', username: 'babydoe', email: 'baby@doe.com', password: 'abc' },
+  { names: 'Jon Doe', username: 'jondoe', email: 'jon@doe.com', password: 'abc', isAdmin:'false' },
+  { names: 'Jane Doe', username: 'janedoe', email: 'jane@doe.com', password: 'abc', isAdmin:'false' },
+  { names: 'Baby Doe', username: 'babydoe', email: 'baby@doe.com', password: 'abc', isAdmin:'false' },
+  { names: 'Riacardo Trimboli', username: 'Tilo', email: 'riki.trimboli@gmail.com', password: '1234', isAdmin: 'true'},
 ]
 
 users.each do |u|
@@ -110,6 +111,7 @@ statistics = [
   {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "1"},
   {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "2"},
   {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "3"},
+  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "4"},
 ]
 
 statistics.each do |statistic|
@@ -122,10 +124,11 @@ lives =[
   {cantidadDeVidas: "3", user_id: "1"},
   {cantidadDeVidas: "3", user_id: "2"},
   {cantidadDeVidas: "3", user_id: "3"},
+  {cantidadDeVidas: "3", user_id: "4"},
 ]
 
 lives.each do |live|
-  Live.create(live)
+  Life.create(live)
 end
 
 puts "se cagaron las vidas"
