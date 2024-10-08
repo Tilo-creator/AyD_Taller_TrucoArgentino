@@ -20,3 +20,4 @@ db:seed
 db:seed:replant
 db:setup
 db:version
+lives:restore

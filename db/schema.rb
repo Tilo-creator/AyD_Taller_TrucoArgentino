@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_17_142434) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_08_145513) do
   create_table "lessons", force: :cascade do |t|
     t.string "chapter"
     t.string "title"
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_142434) do
     t.string "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "isAdmin", default: false
   end
 
   add_foreign_key "lessons", "questions"
