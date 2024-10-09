@@ -5,6 +5,8 @@ require './models/lesson'
 require './models/question'
 require './models/statistic'
 require './models/application_record'
+require './models/level'
+
 
 set :database_file, './config/database.yml'
 
@@ -108,29 +110,29 @@ end
     end
   end
 
+
   post '/preguntas/responder' do
     if session[:user_id]
       @user = User.find(session[:user_id])
-      @statistic = @user.statistics.last || @user.statistics.create
-  
-      # Inicializar los contadores si son nil
-      @statistic.cantidadDePreguntaRespondidas ||= 0
-      @statistic.cantPregRespondidasBien ||= 0
-      @statistic.CantPregRespondidasMal ||= 0
-  
+      @statistic = @user.statistics.last 
+      @level= @user.levels.last
       @question = Question.find(params[:pregunta_id])
       if @question.correct_answer?(params[:respuesta])
         @statistic.cantidadDePreguntaRespondidas += 1
         @statistic.cantPregRespondidasBien += 1
+        @statistic.total_points += 5
         session[:resultado] = "¡Respuesta correcta!"
       else
         @statistic.cantidadDePreguntaRespondidas += 1
-        @statistic.CantPregRespondidasMal += 1
+        @statistic.cantPregRespondidasMal += 1
+        @statistic.total_points-=3
         session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
-      end
-  
+      end 
       @statistic.save
-      actualizar_nivel_usuario(@user)
+      @nivelActual=calcularNivel(@statistic.total_points)
+      @level.level_number=@nivelActual
+      @level.save
+      
       session[:mostrar_mensaje] = true
       redirect '/preguntas'
     else
@@ -138,22 +140,8 @@ end
     end
   end
   
-  def actualizar_nivel_usuario(user)
-    user_statistics = user.statistics.last
-    if user_statistics
-      correctas = user_statistics.cantPregRespondidasBien || 0
-      incorrectas = user_statistics.CantPregRespondidasMal || 0
-  
-      puntos_totales = (correctas * 10) - (incorrectas * 4)
-      puntos_totales = [0, puntos_totales].max
-  
-      user.update(total_points: puntos_totales)
-  
-      nuevo_nivel = calcularNivel(puntos_totales)
-      user.levels.update(level_number: nuevo_nivel)
-    end
-  end
-  
+
+
 
   def calcularNivel(puntos)
     case puntos

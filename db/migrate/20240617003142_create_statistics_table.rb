@@ -5,7 +5,7 @@ class CreateStatisticsTable < ActiveRecord::Migration[7.1]
       t.integer :cantidadDePreguntaRespondidas, default: 0
       t.integer :cantPregRespondidasBien, default: 0
       t.integer :cantPregRespondidasMal, default: 0
-      t.integer :total_points, default: 0 # Asegúrate de que esto esté aquí
+      t.integer :total_points, default: 0 
       
       t.timestamps
     end
