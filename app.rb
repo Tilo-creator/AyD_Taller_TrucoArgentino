@@ -80,10 +80,20 @@ class App < Sinatra::Application
   end
 
   get '/juegos/truco' do
-    @lessons = Lesson.all
     @user = User.find(session[:user_id])
+    if @user.isAdmin
+      redirect'/trucoAdming'
+    end
+    @lessons = Lesson.all
     @life = @user.lives.last
     erb :truco, locals: { lessons: @lessons, vida: @life }
+  end
+
+  get '/trucoAdming' do
+    @user = User.find(session[:user_id])
+    @lessons = Lesson.all
+    @life = @user.lives.last
+    erb :trucoAdming, locals: { lessons: @lessons, vida: @life }
   end
 
   get '/preguntas' do
