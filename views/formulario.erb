@@ -49,7 +49,7 @@
         padding: 10px;
         margin-top: 20px;
         cursor: pointer;
-        width: 100%;
+        width: 49%;
     }
     
     button[type="reset"] {
@@ -64,19 +64,21 @@
 <body>
   <div class="form-container">
     <h1>Generador de pregunta</h1>
-    <form>
-      <p>* Indica que la pregunta es obligatoria</p>
+    <form >
       
-      <label for="description">Descripción *</label>
-      <input type="text" id="description" name="description" placeholder="Tu respuesta">
-      
-      <label for="options">Opciones *</label>
-      <input type="text" id="options" name="options" placeholder="Tu respuesta">
-      
-      <label for="correct-option">Opción correcta *</label>
-      <input type="text" id="correct-option" name="correct-option" placeholder="Tu respuesta">
-      
-      <button type="submit">Enviar</button>
+        <p>* Indica que la pregunta es obligatoria</p>
+        
+        <label for="description">Descripción *</label>
+        <input type="text" id="description" name="description" required>
+        
+        <label for="options">Opciones *</label>
+        <input type="text" id="options" name="options" required>
+        
+        <label for="correct-option">Opción correcta *</label>
+        <input type="text" id="correct-option" name="correct-option" required>
+        
+        <button type="submit">Enviar</button>
+        <button type="submit">Volver</button>
       
     </form>
   </div>

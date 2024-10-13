@@ -96,6 +96,10 @@ class App < Sinatra::Application
     erb :trucoAdming, locals: { lessons: @lessons, vida: @life }
   end
 
+  get '/generarPregunta' do
+    erb:formulario
+  end
+  
   get '/preguntas' do
     @user = User.find(session[:user_id])
     @life = @user.lives.last
