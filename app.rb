@@ -100,6 +100,11 @@ class App < Sinatra::Application
     erb:formulario
   end
   
+  post '/generarPregunta' do
+    @question = Question.new(description: params[:description], options: params[:options], correct_answer: params[:correct_option])
+    @question.save
+    redirect '/trucoAdming'
+  end
   get '/preguntas' do
     @user = User.find(session[:user_id])
     @life = @user.lives.last

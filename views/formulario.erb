@@ -64,7 +64,7 @@
 <body>
   <div class="form-container">
     <h1>Generador de pregunta</h1>
-    <form >
+    <form id="generarPregunta" action="/generarPregunta" method="post">
       
         <p>* Indica que la pregunta es obligatoria</p>
         
@@ -75,12 +75,31 @@
         <input type="text" id="options" name="options" required>
         
         <label for="correct-option">Opción correcta *</label>
-        <input type="text" id="correct-option" name="correct-option" required>
+        <input type="text" id="correct_option" name="correct_option" required>
         
         <button type="submit">Enviar</button>
         <button type="submit">Volver</button>
       
     </form>
+
+    <script>
+    function submitForm() {
+        var form = document.getElementById("generarPregunta");
+        var description = document.getElementById("description").value;
+        var options = document.getElementById("options").value;
+        var correct_option = document.getElementById("correct_option").value;
+
+        // Validar los datos del formulario aquí (puedes agregar más validaciones según tus necesidades)
+        if (description === "" || options === "" || correct_option === "" ) {
+            document.getElementById("errorMessage").innerText = "Por favor completa todos los campos.";
+            document.getElementById("errorMessage").style.display = "block";
+            return;
+        }
+
+        // Si todos los campos están completos, puedes enviar el formulario
+        form.submit();
+    }
+</script>
   </div>
 </body>
 </html>
