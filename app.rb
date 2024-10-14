@@ -134,8 +134,12 @@ end
   post '/preguntas/responder' do
     if session[:user_id]
       @user = User.find(session[:user_id])
-      @statistic = @user.statistics.last 
-      @life = @user.lives.last
+      @statistic = @user.statistics.last || @user.statistics.create
+  
+      # Initialize counters if nil
+      @statistic.cantidadDePreguntaRespondidas ||= 0
+      @statistic.cantPregRespondidasBien ||= 0
+      @statistic.cantPregRespondidasMal ||= 0
   
       if @life.cantidadDeVidas > 0
         @question = Question.find(params[:pregunta_id])
@@ -189,7 +193,6 @@ end
       redirect '/'
     end
   end
-  
 
 
 
