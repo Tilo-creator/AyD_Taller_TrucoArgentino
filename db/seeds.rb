@@ -13,16 +13,6 @@ users = [
 ]
 
 
-users.each do |user_data|
-  user = User.create(user_data)
-  if user.persisted?
-    # Crear un nivel asociado con level_number en 0
-    user.create_level(level_number: 0)
-    puts "Usuario #{user.username} creado con nivel inicial."
-  else
-    puts "Error al crear usuario #{user_data[:username]}: #{user.errors.full_messages.join(', ')}"
-  end
-end
 users.each do |u|
   User.create(u)
 end
@@ -125,12 +115,11 @@ Question.create(
 puts "¡Se crearon las preguntas sobre el Truco Argentino!"
 # Crear estadísticas
 statistics = [
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "1"},
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "2"},
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "3"},
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", CantPregRespondidasMal: "0", user_id: "4"},
-  { cantidadDePreguntaRespondidas: 0, cantPregRespondidasBien: 0, cantPregRespondidasMal: 0, user_id: 1, total_points: 0 },
-  { cantidadDePreguntaRespondidas: 0, cantPregRespondidasBien: 0, cantPregRespondidasMal: 0, user_id: 2, total_points: 0 },
+  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", user_id: "1", total_points: "0"},
+  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", user_id: "2", total_points: "0"},
+  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", user_id: "3", total_points: "0"},
+  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", user_id: "4", total_points: "0"},
+  
 ]
 
 statistics.each do |statistic|

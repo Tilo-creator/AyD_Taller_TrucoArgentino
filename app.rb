@@ -134,23 +134,18 @@ end
   post '/preguntas/responder' do
     if session[:user_id]
       @user = User.find(session[:user_id])
-      @statistic = @user.statistics.last
+      @statistic = @user.statistics.last 
       @life = @user.lives.last
-      @statistic = @user.statistics.last || @user.statistics.create
   
-      # Inicializar los contadores si son nil
-      @statistic.cantidadDePreguntaRespondidas ||= 0
-      @statistic.cantPregRespondidasBien ||= 0
-      @statistic.CantPregRespondidasMal ||= 0
       if @life.cantidadDeVidas > 0
         @question = Question.find(params[:pregunta_id])
         if @question.correct_answer?(params[:respuesta])
-         @statistic.cantidadDePreguntaRespondidas += 1
-         @statistic.cantPregRespondidasBien += 1
+          @statistic.cantidadDePreguntaRespondidas += 1
+          @statistic.cantPregRespondidasBien += 1
           session[:resultado] = "¡Respuesta correcta!"
         else
           @statistic.cantidadDePreguntaRespondidas += 1
-          @statistic.CantPregRespondidasMal += 1
+          @statistic.cantPregRespondidasMal += 1
           @life.cantidadDeVidas -= 1
           session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
         end
@@ -161,11 +156,15 @@ end
       else
         session[:resultado] = "No tienes mas vidas"
         redirect '/preguntas'
-      @statistic.total_point ||= 0
-
-      @statistic.CantPregRespondidasMal ||= 0  # Corrige el nombre aquí
-      @statistic = @user.statistics.last 
-      @level= @user.levels.last
+      end
+  
+      # Corrected logic for points and level calculation
+      @statistic.total_point ||= 0  # Initialize if nil
+      @statistic.cantPregRespondidasMal ||= 0  # Corrected name (cantPregRespondidasMal)
+  
+      @statistic = @user.statistics.last
+      @level = @user.levels.last
+  
       @question = Question.find(params[:pregunta_id])
       if @question.correct_answer?(params[:respuesta])
         @statistic.cantidadDePreguntaRespondidas += 1
@@ -175,14 +174,15 @@ end
       else
         @statistic.cantidadDePreguntaRespondidas += 1
         @statistic.cantPregRespondidasMal += 1
-        @statistic.total_points-=3
+        @statistic.total_points -= 3
         session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
-      end 
+      end
       @statistic.save
-      @nivelActual=calcularNivel(@statistic.total_points)
-      @level.level_number=@nivelActual
+  
+      @nivelActual = calcularNivel(@statistic.total_points)
+      @level.level_number = @nivelActual
       @level.save
-      
+  
       session[:mostrar_mensaje] = true
       redirect '/preguntas'
     else

@@ -11,8 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_10_08_145513) do
-ActiveRecord::Schema[7.1].define(version: 2024_09_11_200822) do
-ActiveRecord::Schema[7.1].define(version: 2024_09_30_123456) do
   create_table "lessons", force: :cascade do |t|
     t.string "chapter"
     t.string "title"
@@ -23,18 +21,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_123456) do
     t.index ["question_id"], name: "index_lessons_on_question_id"
   end
 
-  create_table "lives", force: :cascade do |t|
-    t.integer "cantidadDeVidas", default: 3
-    t.integer "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["user_id"], name: "index_lives_on_user_id"
   create_table "levels", force: :cascade do |t|
     t.integer "level_number", default: 0
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_levels_on_user_id"
+  end
+
+  create_table "lives", force: :cascade do |t|
+    t.integer "cantidadDeVidas", default: 3
+    t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["user_id"], name: "index_lives_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_123456) do
   end
 
   add_foreign_key "lessons", "questions"
-  add_foreign_key "lives", "users"
   add_foreign_key "levels", "users"
+  add_foreign_key "lives", "users"
   add_foreign_key "statistics", "users"
 end
