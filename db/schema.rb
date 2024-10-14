@@ -41,6 +41,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_08_145513) do
     t.text "description", null: false
     t.string "options", null: false
     t.string "correct_answer", null: false
+    t.integer "vecesRespondidasBien", default: 0
+    t.integer "vecesRespondidasMal", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
