@@ -136,56 +136,46 @@ end
       @user = User.find(session[:user_id])
       @statistic = @user.statistics.last 
       @life = @user.lives.last
-  
+      
       if @life.cantidadDeVidas > 0
         @question = Question.find(params[:pregunta_id])
+  
         if @question.correct_answer?(params[:respuesta])
           @statistic.cantidadDePreguntaRespondidas += 1
+          @question.vecesRespondidasBien += 1 
           @statistic.cantPregRespondidasBien += 1
+          @statistic.total_points += 5
           session[:resultado] = "¡Respuesta correcta!"
         else
           @statistic.cantidadDePreguntaRespondidas += 1
           @statistic.cantPregRespondidasMal += 1
+          @question.vecesRespondidasMal +=1
+          @statistic.total_points -= 3
           @life.cantidadDeVidas -= 1
           session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
         end
+  
+        # Guardar cambios en la estadística y vidas
         @statistic.save
         @life.save
+  
+        # Actualizar el nivel basado en los puntos totales
+        @nivelActual = calcularNivel(@statistic.total_points)
+        @level = @user.levels.last
+        @level.level_number = @nivelActual
+        @level.save
+        @question.save
+  
+        # Mostrar mensaje y redirigir a la página de preguntas
         session[:mostrar_mensaje] = true
         redirect '/preguntas'
       else
-        session[:resultado] = "No tienes mas vidas"
+        # Si no hay más vidas, mostrar el mensaje correspondiente
+        session[:resultado] = "No tienes más vidas"
         redirect '/preguntas'
       end
-  
-      # Corrected logic for points and level calculation
-      @statistic.total_point ||= 0  # Initialize if nil
-      @statistic.cantPregRespondidasMal ||= 0  # Corrected name (cantPregRespondidasMal)
-  
-      @statistic = @user.statistics.last
-      @level = @user.levels.last
-  
-      @question = Question.find(params[:pregunta_id])
-      if @question.correct_answer?(params[:respuesta])
-        @statistic.cantidadDePreguntaRespondidas += 1
-        @statistic.cantPregRespondidasBien += 1
-        @statistic.total_points += 5
-        session[:resultado] = "¡Respuesta correcta!"
-      else
-        @statistic.cantidadDePreguntaRespondidas += 1
-        @statistic.cantPregRespondidasMal += 1
-        @statistic.total_points -= 3
-        session[:resultado] = "Respuesta incorrecta. La respuesta correcta es: #{@question.correct_answer}"
-      end
-      @statistic.save
-  
-      @nivelActual = calcularNivel(@statistic.total_points)
-      @level.level_number = @nivelActual
-      @level.save
-  
-      session[:mostrar_mensaje] = true
-      redirect '/preguntas'
     else
+      # Si no hay sesión activa, redirigir a la página principal
       redirect '/'
     end
   end

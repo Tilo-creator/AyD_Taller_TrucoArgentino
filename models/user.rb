@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :statistics
   has_many :lives
   
-  has_many :level
+  has_many :levels
 
   def answer_question(correct)
     self.questions_answered ||= 0
