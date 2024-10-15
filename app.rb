@@ -107,6 +107,16 @@ end
     erb :trucoAdming, locals: { lessons: @lessons, vida: @life }
   end
 
+  get '/generarPregunta' do
+    erb:formulario
+  end
+  
+  post '/generarPregunta' do
+    @question = Question.new(description: params[:description], options: params[:options], correct_answer: params[:correct_option])
+    @question.save
+    redirect '/trucoAdming'
+  end
+  
   get '/lecciones' do 
     @lecciones = Lesson.all
     erb :lecciones
@@ -134,12 +144,8 @@ end
   post '/preguntas/responder' do
     if session[:user_id]
       @user = User.find(session[:user_id])
-      @statistic = @user.statistics.last || @user.statistics.create
-  
-      # Initialize counters if nil
-      @statistic.cantidadDePreguntaRespondidas ||= 0
-      @statistic.cantPregRespondidasBien ||= 0
-      @statistic.cantPregRespondidasMal ||= 0
+      @statistic = @user.statistics.last 
+      @life = @user.lives.last
   
       if @life.cantidadDeVidas > 0
         @question = Question.find(params[:pregunta_id])
