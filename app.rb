@@ -34,6 +34,13 @@ class App < Sinatra::Application
     end
   end
 
+  # Ruta para ver estadísticas de preguntas
+get '/estadisticasPreguntas' do
+  @questions = Question.all
+  erb :estadisticasPreguntas
+end
+
+
   # Ruta para el formulario de registro
   get '/login' do
     erb :login  # Vista para el formulario de registro
