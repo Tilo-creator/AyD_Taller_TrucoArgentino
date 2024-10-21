@@ -17,9 +17,7 @@ users.each do |u|
   User.create(u)
 end
 
-# Crear niveles para usuarios existentes
-Level.create(level_number: 1, user_id: 1)
-Level.create(level_number: 1, user_id: 2)
+
 
 # Semillas para las lecciones
 lessons = [
@@ -115,11 +113,10 @@ Question.create(
 puts "¡Se crearon las preguntas sobre el Truco Argentino!"
 # Crear estadísticas
 statistics = [
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", user_id: "1", total_points: "0"},
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", user_id: "2", total_points: "0"},
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", user_id: "3", total_points: "0"},
-  {cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", user_id: "4", total_points: "0"},
-  
+  {user_id: "1", cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", total_points: "0"},
+  {user_id: "2", cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", total_points: "0"},
+  {user_id: "3", cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", total_points: "0"},
+  {user_id: "4", cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal: "0", total_points: "0"},
 ]
 
 statistics.each do |statistic|
@@ -139,3 +136,8 @@ lives.each do |live|
 end
 
 puts "se cagaron las vidas"
+# Crear niveles para usuarios existentes
+Level.create(level_number: 1, user_id: 1)
+Level.create(level_number: 1, user_id: 2)
+Level.create(level_number: 1, user_id: 3)
+Level.create(level_number: 1, user_id: 4)

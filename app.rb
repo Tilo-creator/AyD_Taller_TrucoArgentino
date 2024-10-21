@@ -175,12 +175,6 @@ end
         # Guardar cambios en la estadística y vidas
         @statistic.save
         @life.save
-  
-        # Actualizar el nivel basado en los puntos totales
-        @nivelActual = calcularNivel(@statistic.total_points)
-        @level = @user.levels.last
-        @level.level_number = @nivelActual
-        @level.save
         @question.save
   
         # Mostrar mensaje y redirigir a la página de preguntas
