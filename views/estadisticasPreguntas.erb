@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estadísticas de Preguntas</title>
+  <link rel="stylesheet" href="../css/estadisticasPreguntas.css">
+</head>
+<body>
+
+
+  <div class="container">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Pregunta</th>
+          <th>Veces Respondidas Bien</th>
+          <th>Veces Respondidas Mal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @questions.each do |question| %>
+          <tr>
+            <td><%= question.description %></td>
+            <td><%= question.vecesRespondidasBien %></td>
+            <td><%= question.vecesRespondidasMal %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <a class="btn-game" href="/juegos">Volver a los juegos</a>
+  </div>
+</body>
+</html>

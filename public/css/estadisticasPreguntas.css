@@ -1,0 +1,84 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("poker.jpg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #fff; /* Color del texto principal */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.container {
+    background-color: rgba(37, 35, 35, 0.541);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    text-align: center;
+    overflow-x: auto;
+}
+
+table {
+    width: 60vw; /* La tabla ocupa el 60% del ancho de la pantalla */
+    margin: 0 auto; /* Centra la tabla */
+    border-collapse: separate; /* Usa `separate` para permitir bordes redondeados */
+    border-spacing: 0; /* Elimina el espaciado entre las celdas */
+    font-size: 1.0rem; /* Tamaño del texto */
+    border-radius: 15px; /* Bordes redondeados en la tabla */
+    overflow: hidden; /* Asegura que el contenido de la tabla no sobresalga */
+}
+
+thead {
+    background-color: #f87922; /* Color de fondo para el encabezado */
+    color: white; /* Color del texto del encabezado */
+}
+
+th, td {
+    padding: 15px 20px; /* Añade espacio dentro de las celdas */
+    text-align: center; /* Centra el texto */
+    border: 1px solid #ccc; /* Añade bordes a las celdas */
+}
+
+tbody tr {
+    background-color: white; /* Fondo blanco para las filas del cuerpo */
+    color: black; /* Texto negro para las filas del cuerpo */
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.4); /* Efecto hover en las filas */
+}
+
+a.btn-game {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #f87922;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+a.btn-game:hover {
+    background-color: #e0671e;
+}
