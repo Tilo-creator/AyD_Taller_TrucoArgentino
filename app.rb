@@ -36,8 +36,11 @@ class App < Sinatra::Application
 
   # Ruta para ver estadísticas de preguntas
 get '/estadisticasPreguntas' do
-  @questions = Question.all
-  erb :estadisticasPreguntas
+    @questions_most_correct = Question.order(vecesRespondidasBien: :desc).limit(5)
+
+    @questions_most_incorrect = Question.order(vecesRespondidasMal: :desc).limit(5)
+  
+    erb :estadisticasPreguntas
 end
 
 
