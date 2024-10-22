@@ -38,34 +38,34 @@ h1 {
 }
 
 table {
-    width: 60vw; /* La tabla ocupa el 60% del ancho de la pantalla */
-    margin: 0 auto; /* Centra la tabla */
-    border-collapse: separate; /* Usa `separate` para permitir bordes redondeados */
-    border-spacing: 0; /* Elimina el espaciado entre las celdas */
-    font-size: 1.0rem; /* Tamaño del texto */
-    border-radius: 15px; /* Bordes redondeados en la tabla */
-    overflow: hidden; /* Asegura que el contenido de la tabla no sobresalga */
+    width: 60vw; 
+    margin: 0 auto; 
+    border-collapse: separate; 
+    border-spacing: 0; 
+    font-size: 1.0rem; 
+    border-radius: 15px; 
+    overflow: hidden; 
 }
-
+h2{
+    color: white
+}
 thead {
-    background-color: #f87922; /* Color de fondo para el encabezado */
-    color: white; /* Color del texto del encabezado */
+    background-color: #f87922; 
+    color: white; 
 }
 
 th, td {
-    padding: 15px 20px; /* Añade espacio dentro de las celdas */
-    text-align: center; /* Centra el texto */
-    border: 1px solid #ccc; /* Añade bordes a las celdas */
+    padding: 15px 20px; 
+    text-align: center; 
+    border: 1px solid #ccc; 
 }
 
 tbody tr {
-    background-color: white; /* Fondo blanco para las filas del cuerpo */
-    color: black; /* Texto negro para las filas del cuerpo */
+    background-color: white; 
+    color: black; 
 }
 
-tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.4); /* Efecto hover en las filas */
-}
+
 
 a.btn-game {
     display: inline-block;

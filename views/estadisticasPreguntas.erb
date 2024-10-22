@@ -7,23 +7,40 @@
   <link rel="stylesheet" href="../css/estadisticasPreguntas.css">
 </head>
 <body>
-
-
   <div class="container">
+    <!-- Tabla para preguntas con más respuestas incorrectas -->
+    <h2>Preguntas Más Respondidas Incorrectamente</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Pregunta</th>
+          <th>Veces Respondidas Mal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @questions_most_incorrect.each do |question| %>
+          <tr>
+            <td><%= question.description %></td>
+            <td><%= question.vecesRespondidasMal %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <!-- Tabla para preguntas con más respuestas correctas -->
+    <h2>Preguntas Más Respondidas Correctamente</h2>
     <table border="1">
       <thead>
         <tr>
           <th>Pregunta</th>
           <th>Veces Respondidas Bien</th>
-          <th>Veces Respondidas Mal</th>
         </tr>
       </thead>
       <tbody>
-        <% @questions.each do |question| %>
+        <% @questions_most_correct.each do |question| %>
           <tr>
             <td><%= question.description %></td>
             <td><%= question.vecesRespondidasBien %></td>
-            <td><%= question.vecesRespondidasMal %></td>
           </tr>
         <% end %>
       </tbody>
@@ -32,4 +49,4 @@
     <a class="btn-game" href="/juegos">Volver a los juegos</a>
   </div>
 </body>
-</html>
+</
