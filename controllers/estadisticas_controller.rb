@@ -7,8 +7,12 @@ require './models/application_record'
 require './models/level'
 # controlador para estadisticas
 class EstadisticasController < Sinatra::Base
-  get '/estadisticas/:id' do
-    @user = User.find(params[:id])
+  configure do
+    set :views, './views'
+  end
+
+  get '/estadisticas' do
+    @user = User.find(session[:user_id])
     @statistic = @user.statistics.last
     erb :estadisticas, locals: { estadistic: @statistic }
   end
