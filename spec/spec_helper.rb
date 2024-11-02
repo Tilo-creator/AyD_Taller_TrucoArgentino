@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['RACK_ENV'] = 'test'
 
 require 'rack/test'
@@ -10,5 +12,5 @@ RSpec.configure do |config|
 end
 
 def app
-  App.new  # Aquí asegúrate de devolver la instancia correcta de tu aplicación
+  App.new # Aquí asegúrate de devolver la instancia correcta de tu aplicación
 end

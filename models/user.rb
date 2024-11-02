@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Dependencias
 class User < ActiveRecord::Base
   validates :names, presence: true
   validates :username, presence: true, uniqueness: true
@@ -7,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :lessons, dependent: :destroy
   has_many :statistics
   has_many :lives
-  
+
   has_many :levels
 
   def answer_question(correct)
