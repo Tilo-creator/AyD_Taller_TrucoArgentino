@@ -33,9 +33,10 @@ class QuestionController < Sinatra::Base
   post '/preguntas/responder' do
     if session[:user_id]
       @user = User.find(session[:user_id])
-      @statistic = @user.statistics.last
+      @statistic = @user.statistics.last 
       @life = @user.lives.last
-
+      @level = @user.levels.last
+  
       if @life.cantidadDeVidas > 0
         procesar_respuesta(params[:pregunta_id], params[:respuesta])
         actualizar_nivel_usuario(@statistic.total_points)
@@ -51,8 +52,7 @@ class QuestionController < Sinatra::Base
     end
   end
   
-  # Métodos auxiliares
-
+  
   def procesar_respuesta(pregunta_id, respuesta)
     @question = Question.find(pregunta_id)
     if @question.correct_answer?(respuesta)
@@ -81,14 +81,38 @@ class QuestionController < Sinatra::Base
   
   def actualizar_nivel_usuario(puntos)
     nuevo_nivel = calcular_nivel(puntos)
-    if @user.level.level_number != nuevo_nivel
-      @user.level.update(level_number: nuevo_nivel)
+    @level.update(level_number: nuevo_nivel) 
+  end
+  
+  def calcular_nivel(puntos)
+    case puntos
+    when 0..99
+      1
+    when 100..199
+      2
+    when 200..299
+      3
+    when 300..399
+      4
+    when 400..499
+      5
+    when 500..599
+      6
+    when 600..699
+      7
+    when 700..799
+      8
+    when 800..899
+      9
+    else
+      10
     end
   end
-
+  
   def guardar_cambios
     @statistic.save
     @life.save
     @question.save
   end
+  
 end

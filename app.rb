@@ -88,30 +88,7 @@ class App < Sinatra::Application
 
 
 
-  def calcular_nivel(puntos)
-    case puntos
-    when 0..99
-      1
-    when 100..199
-      2
-    when 200..299
-      3
-    when 300..399
-      4
-    when 400..499
-      5
-    when 500..599
-      6
-    when 600..699
-      7
-    when 700..799
-      8
-    when 800..899
-      9
-    else
-      10
-    end
-  end
+
 end
 
 App.run! if __FILE__ == $PROGRAM_NAME
