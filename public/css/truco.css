@@ -61,6 +61,12 @@ body {
     background-color: #a32727;
 }
 
+.nivel {
+    font-size: 1.5em; /* Tamaño de letra más grande para el nivel */
+    color: #333333;
+    font-weight: bold;
+}
+
 /* Efecto hover en los botones */
 .submenu a:hover {
     transform: translateY(-5px); /* Elevar el botón */

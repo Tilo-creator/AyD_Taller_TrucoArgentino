@@ -9,15 +9,21 @@
 </head>
 <body>
     <div class="container text-center">
-        <!-- Aquí se mostrarán los corazones -->
-        <div class="hearts">
+        <!-- Aquí se mostrarán los corazones y el nivel -->
+        <div class="status-bar">
+            <div class="hearts">
             <% (1..3).each do |i| %>
-                <% if i <= vida.cantidadDeVidas %>
-                    <i class="fas fa-heart heart"></i>
-                <% else %>
-                    <i class="fas fa-heart heart empty"></i>
+                    <% if i <= vida.cantidadDeVidas %>
+                        <i class="fas fa-heart heart"></i>
+                    <% else %>
+                        <i class="fas fa-heart heart empty"></i>
+                    <% end %>
                 <% end %>
-            <% end %>
+                </div>
+
+                <div class="nivel" >
+                    Nivel: <span><%= @user.levels.last.level_number %></span>
+                </div>
         </div>
 
         <div class="titulo">Truco Argentino</div>
