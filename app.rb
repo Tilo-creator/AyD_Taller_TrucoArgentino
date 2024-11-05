@@ -15,18 +15,18 @@ require_relative './controllers/question_contorller.rb'  # Asegúrate de que est
 require_relative './controllers/user_controller'
 require_relative './controllers/lession_controller.rb'
 
-use EstadisticasController
-use GameController
-use LessonController
-use QuestionController
-use UserController
 
 set :database_file, './config/database.yml'
 set :public_folder, 'public'
 # Clase encargada de manejar la lógica principal de la aplicación
 class App < Sinatra::Application
+  use EstadisticasController
+  use GameController
+  use LessonController
+  use QuestionController
+  use UserController
   enable :sessions
-
+  
   configure do
     set :views, './views'
   end

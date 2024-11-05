@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #000; /* Fondo negro para la pantalla */
+    background-color: #000;
     color: #fff;
     margin: 0;
     padding: 0;
@@ -20,8 +20,8 @@ body {
     background-color: rgba(68, 55, 55, 0.6);
     border-radius: 10px;
     margin: 20px;
-    width: 950px; /* Ancho del contenedor */
-    padding: 30px; /* Agregar padding para evitar una altura fija */
+    width: 950px;
+    padding: 30px;
 }
 
 /* Título principal */
@@ -36,8 +36,8 @@ body {
 /* Estilos para el menú de botones */
 .submenu {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas para los botones */
-    gap: 20px; /* Espacio entre botones */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
     justify-content: center;
     align-items: center;
 }
@@ -61,21 +61,28 @@ body {
     background-color: #a32727;
 }
 
+/* Estilo del nivel */
 .nivel {
+    position: fixed;
+    top: 20px;
+    left: 20px;
     font-size: 1.5em; /* Tamaño de letra más grande para el nivel */
-    color: #333333;
+    color: #f87922;
     font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+    padding: 10px;
+    border-radius: 5px;
 }
 
 /* Efecto hover en los botones */
 .submenu a:hover {
-    transform: translateY(-5px); /* Elevar el botón */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Sombra más fuerte */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
 /* Estilos para íconos dentro de los botones */
 .submenu i {
-    margin-right: 10px; /* Espacio entre el icono y el texto */
+    margin-right: 10px;
 }
 
 /* Estilos para las vidas (corazones) */
