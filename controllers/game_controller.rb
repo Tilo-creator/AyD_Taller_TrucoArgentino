@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './models/user'
 require './models/lesson'
 require './models/question'
@@ -10,15 +12,13 @@ class GameController < Sinatra::Base
     set :views, './views'
   end
   get '/juegos' do
-    juegos = ['Truco', 'Poker', 'Escoba']
+    juegos = %w[Truco Poker Escoba]
     erb :juegos, locals: { juegos: juegos }
   end
 
   get '/juegos/truco' do
     @user = User.find(session[:user_id])
-    if @user.isAdmin
-      redirect'/trucoAdming'
-    end
+    redirect '/trucoAdming' if @user.isAdmin
     @lessons = Lesson.all
     @life = @user.lives.last
     erb :truco, locals: { lessons: @lessons, vida: @life }
