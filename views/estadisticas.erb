@@ -5,66 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estadísticas del Usuario</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-        body {
-            font-family: 'Press Start 2P', cursive;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 20px;
-            background-image: url('/game_background.jpg'); /* Fondo de pantalla estilo juego */
-            background-size: cover;
-            background-position: center;
-        }
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url("poker.jpg");
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+    }
 
-        h1 {
-            text-align: center;
-            color: #ffd700; /* Dorado */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-            margin-bottom: 40px;
-        }
+    .container {
+        text-align: center;
+        background-color: rgba(68, 55, 55, 0.6);
+        border-radius: 10px;
+        width: 950px;
+        padding: 30px;
+    }
 
-        .estadistica {
-            font-size: 1.5rem;
-            text-align: center;
-            margin: 20px 0; /* Aumenta el margen entre estadísticas */
-            padding: 10px 0; /* Añade un poco de relleno dentro de cada estadística */
-            color: #ffffff;
-            border-bottom: 1px solid #ffd700; /* Línea dorada para separación visual */
-        }
+    /* Título principal */
+    h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #f87922;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
 
-        .estadistica:last-child {
-            border-bottom: none; /* Quita la línea del último elemento */
-        }
+    /* Estilos para cada estadística */
+    .estadistica {
+        font-size: 1.5rem;
+        margin: 20px 0;
+        padding: 10px 0;
+        color: #fff;
+        border-bottom: 1px solid #f87922;
+    }
 
-        a.back-button {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            background-color: #ff6347; /* Rojo tomate */
-            color: #fff;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
+    .estadistica:last-child {
+        border-bottom: none;
+    }
 
-        a.back-button:hover {
-            background-color: #e5533d; /* Rojo más oscuro al pasar el ratón */
-            transform: translateY(-3px);
-        }
+    /* Botón de regreso */
+    a.back-button {
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+        background-color: #f87922;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        margin-top: 20px;
+    }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-        }
-    </style>
+    a.back-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Nivel de usuario */
+    .nivel {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        font-size: 1.5em;
+        color: #f87922;
+        font-weight: bold;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    /* Estilos para las vidas (corazones) */
+    .hearts {
+        display: flex;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .heart {
+        font-size: 50px;
+        color: red;
+        margin-right: 10px;
+    }
+
+    .heart.empty {
+        color: lightgray;
+    }
+</style>
+
 </head>
 <body>
     <div class="container">

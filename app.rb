@@ -11,10 +11,9 @@ require './models/application_record'
 require './models/level'
 require_relative './controllers/estadisticas_controller'
 require_relative './controllers/game_controller'
-require_relative './controllers/question_contorller.rb'  # Asegúrate de que este sea correcto
+require_relative './controllers/question_contorller' # Asegúrate de que este sea correcto
 require_relative './controllers/user_controller'
-require_relative './controllers/lession_controller.rb'
-
+require_relative './controllers/lession_controller'
 
 set :database_file, './config/database.yml'
 set :public_folder, 'public'
@@ -26,7 +25,7 @@ class App < Sinatra::Application
   use QuestionController
   use UserController
   enable :sessions
-  
+
   configure do
     set :views, './views'
   end
@@ -60,16 +59,10 @@ class App < Sinatra::Application
     erb :estadisticasPreguntas
   end
 
-
-
-
-
   get '/lecciones' do
     @lecciones = Lesson.all
     erb :lecciones
   end
-
-
 
   get '/juegos/poker' do
     erb :poker
@@ -85,10 +78,6 @@ class App < Sinatra::Application
     @life = @user.lives.last
     erb :trucoAdming, locals: { lessons: @lessons, vida: @life }
   end
-
-
-
-
 end
 
 App.run! if __FILE__ == $PROGRAM_NAME

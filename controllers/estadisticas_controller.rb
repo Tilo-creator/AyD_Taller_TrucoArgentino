@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './models/user'
 require './models/lesson'
 require './models/question'

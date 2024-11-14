@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './models/user'
 require './models/lesson'
 require './models/question'
@@ -7,7 +9,7 @@ require './models/application_record'
 require './models/level'
 class UserController < Sinatra::Base
   enable :sessions
-  
+
   configure do
     set :views, './views'
   end
@@ -26,7 +28,7 @@ class UserController < Sinatra::Base
       if @user.save
         # Crear un nivel inicial para el usuario con level_number en 0
         @user.create_level(level_number: 0)
-  
+
         session[:user_id] = @user.id
         redirect '/juegos'
       else
