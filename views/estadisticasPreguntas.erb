@@ -21,7 +21,8 @@
         <% @questions_most_incorrect.each do |question| %>
           <tr>
             <td><%= question.description %></td>
-            <td><%= question.vecesRespondidasMal %></td>
+            <td><%= "#{question.vecesRespondidasBien + question.vecesRespondidasMal} / #{question.vecesRespondidasMal} " %></td>
+
           </tr>
         <% end %>
       </tbody>
@@ -40,7 +41,7 @@
         <% @questions_most_correct.each do |question| %>
           <tr>
             <td><%= question.description %></td>
-            <td><%= question.vecesRespondidasBien %></td>
+           <td><%= "#{question.vecesRespondidasBien + question.vecesRespondidasMal} / #{question.vecesRespondidasBien} " %></td>
           </tr>
         <% end %>
       </tbody>

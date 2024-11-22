@@ -11,3 +11,5 @@ gem 'rubocop', require: false
 gem 'simplecov', require: false
 gem 'sinatra-activerecord'
 gem 'sqlite3', '~> 1.4'
+gem 'ostruct'
+gem 'logger'

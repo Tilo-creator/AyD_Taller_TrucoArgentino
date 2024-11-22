@@ -29,12 +29,14 @@ GEM
       concurrent-ruby (~> 1.0)
     json (2.7.4)
     language_server-protocol (3.17.0.3)
+    logger (1.6.1)
     minitest (5.23.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     mutex_m (0.2.0)
     nokogiri (1.16.5-x86_64-linux)
       racc (~> 1.4)
+    ostruct (0.6.1)
     parallel (1.26.3)
     parser (3.3.5.0)
       ast (~> 2.4.1)
@@ -102,7 +104,9 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  logger
   nokogiri
+  ostruct
   rack (~> 2.2.4)
   rack-test
   rake

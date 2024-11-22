@@ -7,6 +7,8 @@ require './models/statistic'
 require './models/life'
 require './models/application_record'
 require './models/level'
+
+# controlador de vistas de truco
 class GameController < Sinatra::Base
   configure do
     set :views, './views'

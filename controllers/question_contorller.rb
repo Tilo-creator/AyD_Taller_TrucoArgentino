@@ -7,7 +7,7 @@ require './models/statistic'
 require './models/life'
 require './models/application_record'
 require './models/level'
-
+# controlador de vistas de preguntas
 class QuestionController < Sinatra::Base
   configure do
     set :views, './views'
@@ -22,7 +22,7 @@ class QuestionController < Sinatra::Base
     @question = Question.new(description: params[:description], options: params[:options],
                              correct_answer: params[:correct_option])
     @question.save
-    redirect '/trucoAdmin'
+    redirect '/trucoAdming'
   end
 
   get '/preguntas' do
