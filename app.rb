@@ -17,7 +17,7 @@ require_relative './controllers/lession_controller'
 
 ENV['RACK_ENV'] = 'production'
 
-database_file, './config/database.yml'
+database_file = './config/database.yml'
 
 configure :production do
   db = YALM::load_file(database_file)
