@@ -11,11 +11,19 @@ require './models/application_record'
 require './models/level'
 require_relative './controllers/estadisticas_controller'
 require_relative './controllers/game_controller'
-require_relative './controllers/question_contorller' # Asegúrate de que este sea correcto
+require_relative './controllers/question_contorller'
 require_relative './controllers/user_controller'
 require_relative './controllers/lession_controller'
 
-set :database_file, './config/database.yml'
+ENV['RACK_ENV'] = 'production'
+
+database_file, './config/database.yml'
+
+configure :production do
+  db = YALM::load_file(database_file)
+  ActiveRecord::Base.establish_connection(db['production'])
+end
+
 set :public_folder, 'public'
 # Clase encargada de manejar la lógica principal de la aplicación
 class App < Sinatra::Application
