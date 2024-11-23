@@ -13,7 +13,7 @@ production:
   encoding: unicode
   pool: 5
   timeout: 5000
-  database: <%= ENV['DATABASE_NAME'] %>
-  username: <%= ENV['DATABASE_USER'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: <%= ENV['DATABASE_HOST'] %>
+  database: myapp_production
+  username: Tilo
+  password: iop123
+  host: http://[::1]:9292/
