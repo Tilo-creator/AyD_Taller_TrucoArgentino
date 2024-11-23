@@ -93,7 +93,6 @@ GEM
     sinatra-activerecord (2.0.27)
       activerecord (>= 4.1)
       sinatra (>= 1.0)
-    sqlite3 (1.7.3-x86_64-linux)
     tilt (2.3.0)
     timeout (0.4.1)
     tzinfo (2.0.6)
@@ -116,7 +115,6 @@ DEPENDENCIES
   rubocop
   simplecov
   sinatra-activerecord
-  sqlite3 (~> 1.4)
 
 BUNDLED WITH
    2.3.5
