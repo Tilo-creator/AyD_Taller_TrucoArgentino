@@ -15,10 +15,11 @@ require_relative './controllers/question_contorller'
 require_relative './controllers/user_controller'
 require_relative './controllers/lession_controller'
 require 'yaml'
+require 'sqlite3'
 
 ENV['RACK_ENV'] = 'production'
 
-database_file = './config/database.yml'
+set :database_file, './config/database.yml'
 
 configure :production do
   db = YAML::load_file(database_file)

@@ -11,3 +11,4 @@ test:
 production:
   adapter: sqlite3
   database: db/production.sqlite3
+  port: 9292
