@@ -4,6 +4,9 @@ require 'sinatra/activerecord/rake'
 require './app'
 require 'rake'
 require 'yaml'
+require 'psych'
+
+Psych.safe_load(File.read('config/datebase.yml'), aliases: true)
 
 # Cargar configuraciones desde database.yml
 db_config = YAML.load_file('config/database.yml')
