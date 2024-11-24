@@ -9,11 +9,5 @@ test:
   timeout: 5000
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  timeout: 5000
-  database: myapp_production
-  username: ricardo
-  password: '1531452'
-  port: 5432
+  adapter: sqlite3
+  database: db/production.sqlite3
