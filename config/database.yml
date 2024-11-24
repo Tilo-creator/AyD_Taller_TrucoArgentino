@@ -15,5 +15,5 @@ production:
   timeout: 5000
   database: myapp_production
   username: ricardo
-  password: iop123
+  password: '1531452'
   port: 5432
