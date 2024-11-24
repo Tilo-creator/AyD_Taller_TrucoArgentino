@@ -16,4 +16,4 @@ production:
   database: myapp_production
   username: Tilo
   password: iop123
-  host: http://[::1]:9292/
+  host: 5432
