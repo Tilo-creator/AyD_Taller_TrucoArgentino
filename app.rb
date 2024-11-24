@@ -17,14 +17,8 @@ require_relative './controllers/lession_controller'
 require 'yaml'
 require 'sqlite3'
 
-ENV['RACK_ENV'] = 'production'
 
 set :database_file, './config/database.yml'
-
-configure :production do
-  db = YAML::load_file(database_file)
-  ActiveRecord::Base.establish_connection(db['production'])
-end
 
 set :public_folder, 'public'
 # Clase encargada de manejar la lógica principal de la aplicación
