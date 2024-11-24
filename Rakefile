@@ -3,6 +3,13 @@
 require 'sinatra/activerecord/rake'
 require './app'
 require 'rake'
+require 'yaml'
+
+# Cargar configuraciones desde database.yml
+db_config = YAML.load_file('config/database.yml')
+
+# Establecer conexión
+ActiveRecord::Base.establish_connection(db_config[ENV['RAILS_ENV'] || 'production'])
 
 # Incluir tareas de rake
 Dir.glob('lib/tasks/**/*.rake').each { |r| load r }

@@ -14,13 +14,14 @@ require_relative './controllers/game_controller'
 require_relative './controllers/question_contorller'
 require_relative './controllers/user_controller'
 require_relative './controllers/lession_controller'
+require 'yaml'
 
 ENV['RACK_ENV'] = 'production'
 
 database_file = './config/database.yml'
 
 configure :production do
-  db = YALM::load_file(database_file)
+  db = YAML::load_file(database_file)
   ActiveRecord::Base.establish_connection(db['production'])
 end
 

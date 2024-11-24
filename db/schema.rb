@@ -11,11 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_10_08_145513) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "lessons", force: :cascade do |t|
     t.string "chapter"
     t.string "title"
     t.string "description"
-    t.integer "question_id"
+    t.bigint "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["question_id"], name: "index_lessons_on_question_id"
@@ -23,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_08_145513) do
 
   create_table "levels", force: :cascade do |t|
     t.integer "level_number", default: 0
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_levels_on_user_id"
@@ -31,7 +34,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_08_145513) do
 
   create_table "lives", force: :cascade do |t|
     t.integer "cantidadDeVidas", default: 3
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["user_id"], name: "index_lives_on_user_id"
@@ -48,7 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_08_145513) do
   end
 
   create_table "statistics", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.integer "cantidadDePreguntaRespondidas", default: 0
     t.integer "cantPregRespondidasBien", default: 0
     t.integer "cantPregRespondidasMal", default: 0
