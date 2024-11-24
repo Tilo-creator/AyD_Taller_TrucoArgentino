@@ -18,7 +18,21 @@ require 'yaml'
 require 'sqlite3'
 
 
-set :database_file, './config/database.yml'
+set :database_file, 'config/database.yml'
+
+configure :production do
+  set :database,{
+    adapter:'sqlite3',
+    database:'db/production.sqlite3'
+  }
+end
+
+configure :development do
+  set :database,{
+    adapter:'sqlite3',
+    database:'db/development.sqlite3'
+  }
+end
 
 set :public_folder, 'public'
 # Clase encargada de manejar la lógica principal de la aplicación
