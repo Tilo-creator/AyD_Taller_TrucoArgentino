@@ -18,21 +18,6 @@ require 'yaml'
 require 'sqlite3'
 
 
-set :database_file, 'config/database.yml'
-
-configure :production do
-  set :database,{
-    adapter:'sqlite3',
-    database:'db/production.sqlite3'
-  }
-end
-
-configure :development do
-  set :database,{
-    adapter:'sqlite3',
-    database:'db/development.sqlite3'
-  }
-end
 
 set :public_folder, 'public'
 # Clase encargada de manejar la lógica principal de la aplicación
@@ -43,6 +28,18 @@ class App < Sinatra::Application
   use QuestionController
   use UserController
   enable :sessions
+
+  set :database_file, 'config/database.yml'
+
+  configure do
+    set :database,{
+      adapter: 'sqlite3',
+      database: File.join(settings.root, 'db', 'production.sqlite3')
+   }
+  end
+
+  set :port, ENV['PORT'] || 3000
+  set :bind, '0.0.0.0'
 
   configure do
     set :views, './views'
