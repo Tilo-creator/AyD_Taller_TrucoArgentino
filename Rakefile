@@ -6,7 +6,7 @@ require 'rake'
 require 'yaml'
 require 'psych'
 
-Psych.safe_load(File.read('config/datebase.yml'), aliases: true)
+Psych.safe_load(File.read('config/database.yml'), aliases: true)
 
 # Cargar configuraciones desde database.yml
 db_config = YAML.load_file('config/database.yml')
