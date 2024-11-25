@@ -6,10 +6,8 @@ require 'rake'
 require 'yaml'
 require 'psych'
 
-Psych.safe_load(File.read('config/database.yml'), aliases: true)
+db_config = Psych.safe_load(File.read('config/database.yml'), aliases: true)
 
-# Cargar configuraciones desde database.yml
-db_config = YAML.load_file('config/database.yml')
 
 # Establecer conexión
 ActiveRecord::Base.establish_connection(db_config[ENV['RAILS_ENV'] || 'production'])
