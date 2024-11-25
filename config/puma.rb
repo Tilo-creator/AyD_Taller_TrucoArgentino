@@ -15,6 +15,8 @@ environment ENV.fetch("RACK_ENV") { "production" }
 # Enable cluster mode with the number of workers (useful for production).
 workers ENV.fetch("WEB_CONCURRENCY") { 2 }
 
+rackup "config.ru"
+
 # Preload the application for performance.
 preload_app!
 
