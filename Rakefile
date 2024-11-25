@@ -4,13 +4,10 @@ require 'sinatra/activerecord/rake'
 require './app'
 require 'rake'
 require 'yaml'
-require 'psych'
-
-db_config = Psych.safe_load(File.read('config/database.yml'), aliases: true)
 
 
-# Establecer conexión
-ActiveRecord::Base.establish_connection(db_config[ENV['RAILS_ENV'] || 'production'])
+
+
 
 # Incluir tareas de rake
 Dir.glob('lib/tasks/**/*.rake').each { |r| load r }
