@@ -1,5 +1,5 @@
 # Usa una imagen base de Ruby
-FROM ruby:3.2
+FROM ruby:3.3.5
 
 # Configura el directorio de trabajo
 WORKDIR /app
