@@ -15,10 +15,7 @@ RUN bundle install
 
 # Copia el resto de la aplicación al contenedor
 
-COPY config/ config/
-COPY db/ db/
-COPY Gemfile Gemfile.lock ./
-
+COPY . .
 
 # Expone el puerto de la aplicación
 EXPOSE 3000

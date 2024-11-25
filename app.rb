@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sinatra'
+require 'sinatra/base'
 require 'sinatra/activerecord'
 require './models/user'
 require './models/lesson'
@@ -21,7 +22,7 @@ require 'sqlite3'
 
 set :public_folder, 'public'
 # Clase encargada de manejar la lógica principal de la aplicación
-class App < Sinatra::Application
+class App < Sinatra::Base
   use EstadisticasController
   use GameController
   use LessonController
@@ -29,7 +30,9 @@ class App < Sinatra::Application
   use UserController
   enable :sessions
 
-  set :database_file, 'config/database.yml'
+  set :port, ENV.fetch("PORT", 3000)
+  set :environment, ENV.fetch("RACK_ENV", "production")
+
 
   configure do
     set :database,{
