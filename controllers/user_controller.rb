@@ -21,16 +21,20 @@ class UserController < Sinatra::Base
   post '/login' do
     if params[:password] == params[:confirm_password]
       @user = User.new(
-        fullname: params[:fullname],
+        names: params[:names],
         username: params[:username],
         email: params[:email],
         password: params[:password]
       )
       if @user.save
-        # Crear un nivel inicial para el usuario con level_number en 0
-        @user.create_level(level_number: 0)
-
+        # Crear un nivel inicial para el usuario con level_number en 1
         session[:user_id] = @user.id
+        @statistic = Statistic.new(cantidadDePreguntaRespondidas: "0", cantPregRespondidasBien: "0", cantPregRespondidasMal:"0",total_points: "0", user_id: @user.id)
+        @statistic.save
+        @life = Life.new(cantidadDeVidas: "3", user_id: @user.id)
+        @life.save
+        @level = Level.new(level_number: 1,user_id: @user.id)
+        @level.save
         redirect '/juegos'
       else
         erb :login, locals: { mensaje: 'Hubo un error al crear tu cuenta. Inténtalo de nuevo.' }
